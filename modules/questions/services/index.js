@@ -16,7 +16,9 @@ const jumbleOptions = (questions) => {
 };
 
 module.exports = {
-    getQuestions: (gameID, callBack) => {
+    getQuestions: (callBack) => {
+        // get the game ID and get related questions only
+        const gameID = process.env.GAMEID;
         let questions = {};
         // Call Force service here and get questions
         console.log(gameID);

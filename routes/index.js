@@ -11,8 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/questions', (req, res) => {
-  const gameID = process.env.GAMEID;
-  MODULES.questions.getQuestions(gameID, (err, questions) => {
+  MODULES.questions.getQuestions((err, questions) => {
     if (err) {
       return res.status(500).jsonp({
         status: 'error while fetching questions',
