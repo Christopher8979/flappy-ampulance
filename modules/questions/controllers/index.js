@@ -5,8 +5,8 @@ const service = require('../services');
 
 
 module.exports = {
-    getQuestions: () => {
-
+    getQuestions: (gameID, callBack) => {
+        service.getQuestions(gameID, callBack);
     },
     checkAnswer: () => {
 

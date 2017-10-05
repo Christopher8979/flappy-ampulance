@@ -16,9 +16,10 @@ const jumbleOptions = (questions) => {
 };
 
 module.exports = {
-    getQuestions: (gameID) => {
+    getQuestions: (gameID, callBack) => {
         let questions = {};
+        // Call Force service here and get questions
         console.log(gameID);
-        return questions;
+        callBack(null, questions);
     }
 };
