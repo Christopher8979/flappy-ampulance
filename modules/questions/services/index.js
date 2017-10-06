@@ -46,5 +46,19 @@ module.exports = {
             callBack(null, randomizeOptions ? jumbleOptions(questions) : questions);
         });
 
+    },
+    checkAnswer: (id, answered, showAns, callBack) => {
+
+        ORM.checkAnswer(id, answered, (err, response) => {
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (!showAns) {
+                delete resp.correctOption;
+            }
+            
+            callBack(null, resp);
+        });
     }
 };

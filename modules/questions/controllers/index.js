@@ -9,7 +9,7 @@ module.exports = {
     getQuestions: (callBack) => {
         service.getQuestions(config.randomizeQuestions, config.randomizeOptions, callBack);
     },
-    checkAnswer: () => {
-
+    checkAnswer: (id, answer, callBack) => {
+        service.checkAnswer(id, answer, config.showAnswer, callBack);
     }
 }
