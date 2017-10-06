@@ -32,7 +32,7 @@ const jumbleOptions = (questions) => {
 };
 
 module.exports = {
-    getQuestions: (callBack) => {
+    getQuestions: (randomizeQuestions, randomizeOptions, callBack) => {
         // get the game ID and get related questions only
         const gameID = process.env.GAMEID;
         // Call Force service here and get questions
@@ -41,7 +41,9 @@ module.exports = {
                 return callBack(err, null);
             }
 
-            callBack(null, jumbleOptions(questions));
+            questions = randomizeQuestions ? UTILS.shuffleArray(JSON.parse(JSON.stringify(questions))) : questions;
+
+            callBack(null, randomizeOptions ? jumbleOptions(questions) : questions);
         });
 
     }
