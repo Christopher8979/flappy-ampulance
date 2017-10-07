@@ -23,4 +23,25 @@ router.get('/questions', (req, res) => {
   });
 });
 
+router.post('/check-answer/:attempt/:id', (req, res) => {
+
+  if (!(req.params && req.params.attempt && req.params.id )) {
+    return res.render('error', 'Proper params are not provided');
+  }
+
+  const questionNo = req.params.id;
+  const answeredAs = req.body.answeredAs;
+  const attemptID = req.params.attempt;
+
+  MODULES.questions.checkAnswer(questionNo, answeredAs, (err, response) => {
+    if (err) {
+      console.info('Error wihile checking answers');
+      console.log(err);
+      return res.status(400).jsonp(err);
+    }
+
+    res.status(200).jsonp(response);
+  });
+});
+
 module.exports = router;
