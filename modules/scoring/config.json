@@ -1,3 +1,6 @@
 {
-    
+    "playersLCount" : 10,
+    "objectID" : "Players__c",
+    "playerIdentifier" : "Email__c"
+
 }

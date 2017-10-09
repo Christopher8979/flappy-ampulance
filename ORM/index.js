@@ -31,5 +31,31 @@ module.exports = {
 
             callBack(null, resp);
         });
+    },
+    checkRecords : (object, key, value, callBack) => {
+        var query = "Select id from " + object + " where " + key + " = \'" + value + "\'";
+        FS.Query(query, function(err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (findResp.totalSize) {
+                console.info('\nUser found so returning userID\n');
+                callBack(null, true, findResp.records[0].Id);
+            } else {
+                console.info('\nUser not found so creating a player in SFDC.\n');
+                callBack(null, false);
+            }
+        });
+    },
+    createRecord : (object, data, callBack) => {
+        FS.create(object, data, function(err, createResp) {
+            if (err) {
+                callBack(err, null);
+            } else {
+                callBack(null, createResp.id);
+            }
+        });
     }
 };
