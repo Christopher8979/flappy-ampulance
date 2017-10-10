@@ -6,10 +6,21 @@ const config = require('../config.json');
 
 
 module.exports = {
-    getLeaderBoard : () => {
-        const NO_OF_PLAYERS = config.playersLCount;
+    getLeaderBoard : (offset, callBack) => {
+        const OBJ_DETAILS = {
+            name: config.objectID,
+            flag: config.attemptCompleteFlag,
+            value: config.attemptCompleteValue
+        };
 
-
+        if (config.isLazyLoading) {
+            const NO_OF_PLAYERS = config.playersPerSet;
+        } else {
+            const NO_OF_PLAYERS = config.playersLCount;
+            offset = 0;
+        }
+        
+        service.fetchTopScorrers(NO_OF_PLAYERS, offset, OBJ_DETAILS, callBack);        
     },
     getHighScorrer : () => {},
     createAttempt : () => {},

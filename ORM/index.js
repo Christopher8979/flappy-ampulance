@@ -57,5 +57,17 @@ module.exports = {
                 callBack(null, createResp.id);
             }
         });
+    },
+    fetchTopPlayers : (playerCount, offset, objDetails, callBack) => {
+
+        var query = "SELECT * FROM " + objDetails.name + " where " + objDetails.flag + " = " + objDetails.value + " AND ORDER BY CreatedDate DESC limit " + playerCount + " OFFSET " + offset;
+        
+        FS.Query(query, function(err, data) {
+            if (err) {
+            return callBack(err, null);
+            }
+    
+            return callBack(null, data.records);
+        });
     }
 };

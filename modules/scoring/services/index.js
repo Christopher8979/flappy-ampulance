@@ -3,10 +3,12 @@ const UTILS = require('../../../utils.js');
 const ORM = require('../../../ORM');
 
 let thisService = {
-    fetchScores : (id, attempts, callBack) => {},
-    fetchTopScorrers : (noOfPlayers, callBack) => {},
+    fetchTopScorrers : (noOfPlayers, offset, obj, callBack) => {
+        ORM.fetchTopPlayers(noOfPlayers, offset, obj, callBack);
+    },
     createAttempt : () => {},
     saveAttempt : () => {},
+    fetchAttempts : (id, count, callBack) => {},
     checkPlayer : (data, objDetails, callBack) => {
         ORM.checkRecords(objDetails.name, objDetails.identifier, data.Email__c, (err, isPresent, ID) => {
             if (err) {
