@@ -39,5 +39,5 @@ jspm_packages
 # Custom Ignores
 # game.js
 .env
-
+package-lock.json
 public/javascripts/min
