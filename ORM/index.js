@@ -1,4 +1,6 @@
 const FS = require('./ForceService.js');
+const ASYNC = require('async');
+
 
 module.exports = {
     getQuestions : (gameID, callBack) => {
@@ -30,6 +32,133 @@ module.exports = {
             }
 
             callBack(null, resp);
+        });
+    },
+    checkRecords : (object, key, value, callBack) => {
+        var query = "Select id from " + object + " where " + key + " = \'" + value + "\'";
+        FS.Query(query, function(err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (findResp.totalSize) {
+                console.info('\nUser found so returning userID\n');
+                callBack(null, true, findResp.records[0].Id);
+            } else {
+                console.info('\nUser not found so creating a player in SFDC.\n');
+                callBack(null, false);
+            }
+        });
+    },
+    createRecord : (object, data, callBack) => {
+        FS.create(object, data, function(err, createResp) {
+            if (err) {
+                callBack(err, null);
+            } else {
+                callBack(null, createResp.id);
+            }
+        });
+    },
+    fetchTopPlayers : (playerCount, offset, objDetails, callBack) => {
+
+        var query = "SELECT * FROM " + objDetails.name + " where " + objDetails.flag + " = " + objDetails.value + " AND ORDER BY CreatedDate DESC limit " + playerCount + " OFFSET " + offset;
+        
+        FS.Query(query, function(err, data) {
+            if (err) {
+            return callBack(err, null);
+            }
+    
+            return callBack(null, data.records);
+        });
+    },
+    completeIncompleteAttempts : (id, obj, callBack) => {
+
+        let getUncheckedRecordsQuery = "Select ";
+
+        obj.getThese.forEach((val, ind) => {
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + val + ", ";
+        });
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery.substring(0, getUncheckedRecordsQuery.length - 2);
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + " From " + obj.objName + " where ";
+        
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = " + obj.clauses[val] + " and ";
+        });
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + obj.playerAPI + " = " + obj.value;
+        
+        FS.Query(getUncheckedRecordsQuery, function(err, resp) {
+            if (err) {
+            return callBack(err, null);
+            }
+            
+            let upsertValue = {};
+            upsertValue[obj.key] = true;
+
+            ASYNC.each(resp.records, function(item, cb) {
+                FS.upsert(obj.objName, upsertValue, item.Id, function(err, resp) {
+                    if (err) {
+                    return cb(err, null);
+                    }
+                    cb(null, resp);
+                });
+            }, function(err) {
+                if (err) {
+                    return callBack(err, null);
+                }
+    
+                let newAttemptDefaultData = {};
+
+                obj.defaltsForNewRecord.forEach((detail, index) => {
+                    newAttemptDefaultData[detail.key] = detail.value;
+                });
+
+                FS.create(obj.objName, newAttemptDefaultData, function(err, resp) {
+                    if (err) {
+                        console.info('Error wile saving attempt data in SFDC');
+                        console.info(err);
+                        callBack(err, null);
+                    }
+
+                    callBack(null, resp);
+                });
+            });
+        });
+    },
+    updateRecord : (id, data, objName, callBack) => {
+        FS.upsert(objName, data, id, function(err, resp) {
+            if (err) {
+                return callBack(err, null);
+            }
+            callBack(null, resp);
+        });
+    },
+    getAttempts : (id, obj, callBack) => {
+        let query = "Select ";
+        
+        obj.details.forEach((val, ind) => {
+            query = query + val + ", ";
+        });
+
+        query = query.substring(0, query.length - 2);
+
+        query = query + " From " + obj.from + " where ";
+        
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            query = query + " " + val + " = " + obj.clauses[val] + " and ";
+        });
+
+        query = query + obj.subQuerySelector + " in ( select id from " + obj.subQuerySelector + "where id = \'" + id + "\' ) ORDER BY CreatedDate DESC limit " + obj.limit + " OFFSET " + obj.offset;
+                
+        FS.Query(query, function(err, data) {
+            if (err) {
+                return callBack(err, null);
+            }
+    
+            return callBack(null, data.records);
         });
     }
 };

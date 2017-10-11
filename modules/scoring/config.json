@@ -1,0 +1,40 @@
+{
+    "playersLCount" : 10,
+    "isLazyLoading" : true,
+    "objectID" : "Players__c",
+    "playerIdentifier" : "Email__c",
+    "playersPerSet" : 10,
+    "attemptCompleteFlag" : "Attempt_Completed__c",
+    "attemptCompleteValue" : true,
+    "scoringKey" : "",
+    "attemptsObjName" : "Player_Attempt__c",
+    "isAttemptComplete" : {
+        "key" : "Attempt_Completed__c",
+        "objName" : "Player_Attempt__c",
+        "getThese" : ["id", "Attempt_Completed__c"],
+        "clauses" : {
+            "Attempt_Completed__c" : false
+        },
+        "playerAPI" : "player__c",
+        "defaltsForNewRecord" : [
+            {
+                "key" : "Correct_Answers__c",
+                "value" : 0
+            },
+            {
+                "key" : "Total_Questions_Attempted__c",
+                "value" : 0
+            }
+        ]
+    },
+    "lastAttemptDetails" : {
+        "details" : ["Correct_Answers__c", "Final_Score__c", "Id", "Name", "Negative_Tokens_Caught__c", "Player__c", "Positive_Tokens_Caught__c", "Time_Taken__c", "Token_Points__c", "Total_Questions_Attempted__c", "Total_Tokens_Caught__c"],
+        "offset" : 0,
+        "limit" : 2,
+        "from" : "Player_Attempt__c",
+        "clauses" : {
+            "Attempt_Completed__c" : false
+        },
+        "subQuerySelector" : "Players__c"
+    }
+}
