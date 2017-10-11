@@ -1,4 +1,6 @@
 const FS = require('./ForceService.js');
+const ASYNC = require('async');
+
 
 module.exports = {
     getQuestions : (gameID, callBack) => {
@@ -68,6 +70,62 @@ module.exports = {
             }
     
             return callBack(null, data.records);
+        });
+    },
+    completeIncompleteAttempts : (id, obj, callBack) => {
+
+        let getUncheckedRecordsQuery = "Select ";
+
+        obj.getThese.forEach((val, ind) => {
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + val + ", ";
+        });
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery.substring(0, getUncheckedRecordsQuery.length - 2);
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + " From " + obj.objName + " where ";
+        
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = " + obj.clauses[val] + " and ";
+        });
+
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + obj.playerAPI + " = " + obj.value;
+        
+        FS.Query(getUncheckedRecordsQuery, function(err, resp) {
+            if (err) {
+            return callBack(err, null);
+            }
+            
+            let upsertValue = {};
+            upsertValue[obj.key] = true;
+
+            ASYNC.each(resp.records, function(item, cb) {
+                FS.upsert(obj.objName, upsertValue, item.Id, function(err, resp) {
+                    if (err) {
+                    return cb(err, null);
+                    }
+                    cb(null, resp);
+                });
+            }, function(err) {
+                if (err) {
+                    return callBack(err, null);
+                }
+    
+                let newAttemptDefaultData = {};
+
+                obj.defaltsForNewRecord.forEach((detail, index) => {
+                    newAttemptDefaultData[detail.key] = detail.value;
+                });
+
+                FS.create(obj.objName, newAttemptDefaultData, function(err, resp) {
+                    if (err) {
+                        console.info('Error wile saving attempt data in SFDC');
+                        console.info(err);
+                        callBack(err, null);
+                    }
+                    
+                    callBack(null, resp);
+                });
+            });
         });
     }
 };

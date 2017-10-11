@@ -22,8 +22,19 @@ module.exports = {
         
         service.fetchTopScorrers(NO_OF_PLAYERS, offset, OBJ_DETAILS, callBack);        
     },
-    getHighScorrer : () => {},
-    createAttempt : () => {},
+    getHighScorrer : (callBack) => {
+        const OBJ_DETAILS = {
+            name: config.objectID,
+            flag: config.attemptCompleteFlag
+        };
+        
+        service.fetchTopScorrers(1, 0, OBJ_DETAILS, callBack);
+    },
+    createAttempt : (id, data, callBack) => {
+        const OBJ_DETAILS = config.isAttemptComplete;
+
+        service.createAttempt(id, data, OBJ_DETAILS, callBack);
+    },
     updateAttempt : () => {},
     getLatestAttempts : () => {},
     createPlayer : (info, callBack) => {

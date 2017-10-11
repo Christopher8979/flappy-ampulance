@@ -6,7 +6,13 @@ let thisService = {
     fetchTopScorrers : (noOfPlayers, offset, obj, callBack) => {
         ORM.fetchTopPlayers(noOfPlayers, offset, obj, callBack);
     },
-    createAttempt : () => {},
+    createAttempt : (id, data, objDetails, callBack) => {
+        // before creating a new attempt check the isComplete flag.
+        objDetails.value = data.Player__c;
+        ORM.completeIncompleteAttempts(id, objDetails, () => {
+
+        });
+    },
     saveAttempt : () => {},
     fetchAttempts : (id, count, callBack) => {},
     checkPlayer : (data, objDetails, callBack) => {

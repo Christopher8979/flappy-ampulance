@@ -5,5 +5,25 @@
     "playerIdentifier" : "Email__c",
     "playersPerSet" : 10,
     "attemptCompleteFlag" : "Attempt_Completed__c",
-    "attemptCompleteValue" : true
+    "attemptCompleteValue" : true,
+    "scoringKey" : "",
+    "isAttemptComplete" : {
+        "key" : "Attempt_Completed__c",
+        "objName" : "Player_Attempt__c",
+        "getThese" : ["id", "Attempt_Completed__c"],
+        "clauses" : {
+            "Attempt_Completed__c" : false
+        },
+        "playerAPI" : "player__c",
+        "defaltsForNewRecord" : [
+            {
+                "key" : "Correct_Answers__c",
+                "value" : 0
+            },
+            {
+                "key" : "Total_Questions_Attempted__c",
+                "value" : 0
+            }
+        ]
+    }
 }
