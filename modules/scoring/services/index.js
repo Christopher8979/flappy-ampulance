@@ -13,8 +13,12 @@ let thisService = {
 
         });
     },
-    saveAttempt : () => {},
-    fetchAttempts : (id, count, callBack) => {},
+    saveAttempt : (id, data, objName, callBack) => {
+        ORM.updateRecord(id, data, objName, callBack);
+    },
+    fetchAttempts : (id, obj, callBack) => {
+        ORM.getAttempts(id, obj, callBack);
+    },
     checkPlayer : (data, objDetails, callBack) => {
         ORM.checkRecords(objDetails.name, objDetails.identifier, data.Email__c, (err, isPresent, ID) => {
             if (err) {

@@ -122,10 +122,43 @@ module.exports = {
                         console.info(err);
                         callBack(err, null);
                     }
-                    
+
                     callBack(null, resp);
                 });
             });
+        });
+    },
+    updateRecord : (id, data, objName, callBack) => {
+        FS.upsert(objName, data, id, function(err, resp) {
+            if (err) {
+                return callBack(err, null);
+            }
+            callBack(null, resp);
+        });
+    },
+    getAttempts : (id, obj, callBack) => {
+        let query = "Select ";
+        
+        obj.details.forEach((val, ind) => {
+            query = query + val + ", ";
+        });
+
+        query = query.substring(0, query.length - 2);
+
+        query = query + " From " + obj.from + " where ";
+        
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            query = query + " " + val + " = " + obj.clauses[val] + " and ";
+        });
+
+        query = query + obj.subQuerySelector + " in ( select id from " + obj.subQuerySelector + "where id = \'" + id + "\' ) ORDER BY CreatedDate DESC limit " + obj.limit + " OFFSET " + obj.offset;
+                
+        FS.Query(query, function(err, data) {
+            if (err) {
+                return callBack(err, null);
+            }
+    
+            return callBack(null, data.records);
         });
     }
 };

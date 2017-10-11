@@ -35,8 +35,14 @@ module.exports = {
 
         service.createAttempt(id, data, OBJ_DETAILS, callBack);
     },
-    updateAttempt : () => {},
-    getLatestAttempts : () => {},
+    updateAttempt : (id, data, callBack) => {
+        const OBJ_DETAILS = config.attemptsObjName;        
+        service.saveAttempt(id, data, OBJ_DETAILS, callBack);
+    },
+    getLatestAttempts : (id, callBack) => {
+        const OBJ_DETAILS = config.lastAttemptDetails;        
+        service.fetchAttempts(id, OBJ_DETAILS, callBack);
+    },
     createPlayer : (info, callBack) => {
         const OBJ_DETAILS = {
             name : config.objectID,
