@@ -13,6 +13,11 @@ const decodeData = (text) => {
 module.exports = (io) => {
     io.on('connection', (socket) => {
 
+        // on connection, we add a key with unique ID created which will hold the number of pipes user has passed
+        const IDENTIFIER = socket.id;
+
+        socket[IDENTIFIER] = 0;
+
         socket.on('crash', (data) => {
             // Data has to be processed before using it further
             id = decodeData(data.id);
@@ -24,7 +29,7 @@ module.exports = (io) => {
 
             // If condition is to be written here
             questions.getLimitedQuestions(pipesPassed, (e, questions) => {
-                
+
                 socket.emit('fetchedQuestions', questions);
             });
 
@@ -42,8 +47,13 @@ module.exports = (io) => {
             // pipe score - no purpose for now as we as anyways storing in redis
             // Increment pipe value in session
 
+            socket[IDENTIFIER]++;
+
         });
 
-
+        socket.on('disconnecting', (reason) => {
+            // This method gets called when a socket is closed i.e., when browser is closed.
+            // Check if the latest attempt is complete, else close the attempt
+        });
     });
 };
