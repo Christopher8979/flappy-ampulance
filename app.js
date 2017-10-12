@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sockets = require('socket.io');
 var index = require('./routes/index');
+var allSockets = require('./modules/sockets/controllers');
 
 
 var app = express();
@@ -45,8 +46,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-io.on('connection', (socket) => {
-  console.log('sockets successfullllllllllll');
-})
+allSockets(io);
 
 module.exports = app;

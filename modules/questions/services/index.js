@@ -47,6 +47,22 @@ module.exports = {
         });
 
     },
+    getLimitedQuestions: (number, randomizeQuestions, randomizeOptions, callBack) => {
+        // get the game ID and get related questions only
+        const gameID = process.env.GAMEID;
+        // Call Force service here and get questions
+        ORM.getQuestions(gameID, (err, questions) => {
+            if (err) {
+                return callBack(err, null);
+            }
+
+            questions = randomizeQuestions ? UTILS.shuffleArray(JSON.parse(JSON.stringify(questions))) : questions;
+            
+            questions = UTILS.limitTo(number, questions);
+            
+            callBack(null, randomizeOptions ? jumbleOptions(questions) : questions);
+        });
+    },        
     checkAnswer: (id, answered, showAns, callBack) => {
 
         ORM.checkAnswer(id, answered, (err, response) => {

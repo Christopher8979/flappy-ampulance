@@ -20,6 +20,9 @@
 
     <script>
       var socket = io();
+      socket.on('fetchedQuestions', function (questions) {
+        console.log(questions);
+      });
     </script>
   </body>
 </html>

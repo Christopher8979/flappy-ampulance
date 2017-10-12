@@ -5,11 +5,17 @@ const service = require('../services');
 const config = require('../config.json');
 
 
-module.exports = {
+Questions = {
     getQuestions: (callBack) => {
         service.getQuestions(config.randomizeQuestions, config.randomizeOptions, callBack);
     },
     checkAnswer: (id, answer, callBack) => {
         service.checkAnswer(id, answer, config.showAnswer, callBack);
+    },
+    getLimitedQuestions: (number, callBack) => {
+        
+        service.getLimitedQuestions(number, config.randomizeQuestions, config.randomizeOptions, callBack);        
     }
-}
+};
+
+module.exports = Questions;
