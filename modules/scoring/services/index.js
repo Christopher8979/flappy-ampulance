@@ -25,9 +25,9 @@ let thisService = {
                 return callBack(err, null);
             }
             if (isPresent) {
-                callBack(null, ID)
+                callBack(null, isPresent, ID);
             } else {
-                thisService.createPlayer(objDetails.name, data, callBack);
+                callBack(null, isPresent);
             }
         });
     },
@@ -36,7 +36,7 @@ let thisService = {
             if (err) {
                 callBack(err, null);
             } else {
-                callBack(null, createResp.id);
+                callBack(null, createResp);
             }
         });
     }

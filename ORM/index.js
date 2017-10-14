@@ -53,10 +53,8 @@ module.exports = {
             }
 
             if (findResp.totalSize) {
-                console.info('\nUser found so returning userID\n');
                 callBack(null, true, findResp.records[0].Id);
             } else {
-                console.info('\nUser not found so creating a player in SFDC.\n');
                 callBack(null, false);
             }
         });

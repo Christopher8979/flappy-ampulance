@@ -1,7 +1,7 @@
 {
     "playersLCount" : 10,
     "isLazyLoading" : true,
-    "objectID" : "Players__c",
+    "objectID" : "LSHC_Player__c",
     "playerIdentifier" : "Email__c",
     "playersPerSet" : 10,
     "attemptCompleteFlag" : "Attempt_Completed__c",

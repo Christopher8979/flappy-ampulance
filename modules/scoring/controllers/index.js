@@ -49,15 +49,18 @@ module.exports = {
             identifier: config.playerIdentifier
         };
         // Check if player is present and then create if present
-        service.checkPlayer(info, OBJ_DETAILS, (err, playerID) => {
+        service.checkPlayer(info, OBJ_DETAILS, (err, playerPresent, playerID) => {
             if (err) {
                 console.log('Error while creating player');
                 console.log(err);
                 return callBack(err, null);
             }
 
-            // Gets the ID of player created
-            callBack(null, playerID)
+            if (playerPresent) {
+                callBack(null, playerID);
+            } else {
+                service.createPlayer(OBJ_DETAILS.name, info, callBack);
+            }
         });
     }
 }

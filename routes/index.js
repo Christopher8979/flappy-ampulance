@@ -46,13 +46,6 @@ router.get('/', function (req, res, next) {
                 }
             });
 
-            console.log({
-                title: 'Flappy Ambulance',
-                description: 'Some random text',
-                topScorrer: topScorrer,
-                serviceLineOptions: serviceLineOptions
-            });
-
             res.render('index', {
                 title: 'Flappy Ambulance',
                 description: 'Some random text',
