@@ -3,12 +3,65 @@ var router = express.Router();
 
 const MODULES = {
     questions: require('../modules/questions/controllers'),
-    scores: require('../modules/scoring/controllers')
+    scores: require('../modules/scoring/controllers'),
+    orm: require('../ORM')
 };
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Flappy Ambulance', description: 'Some random text' });
+    MODULES.scores.getHighScorrer((err, winnerInfo) => {
+
+        // Getting error her currently, should change query later.
+
+        var topScorrer = {
+            name: "-",
+            email: "-",
+            score: "-"
+        };
+
+        if (winnerInfo) {
+            topScorrer = {
+                name: winnerInfo.Player__r.Name,
+                email: winnerInfo.Player__r.Email__c,
+                score: winnerInfo.Final_Score__c
+            };
+        }
+
+        MODULES.orm.getMetadata(process.env.META_DATA_AT, (err, metadata) => {
+            if (err) {
+                console.log(err);
+                return res.render('500', 'Something went wrong in the backend');
+            }
+
+            var fields = metadata.fields;
+            var serviceLineOptions = [];
+            fields.forEach(function (value) {
+                if (value.name === process.env.SERVICE_LINE_KEY) {
+                    value.picklistValues.forEach(function (options) {
+                        serviceLineOptions.push({
+                            label: options.label,
+                            value: options.value
+                        });
+                    });
+                }
+            });
+
+            console.log({
+                title: 'Flappy Ambulance',
+                description: 'Some random text',
+                topScorrer: topScorrer,
+                serviceLineOptions: serviceLineOptions
+            });
+
+            res.render('index', {
+                title: 'Flappy Ambulance',
+                description: 'Some random text',
+                topScorrer: topScorrer,
+                serviceLineOptions: serviceLineOptions
+            });
+        });
+
+    });
 });
 
 router.post('/checkUser', (req, res) => {
