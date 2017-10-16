@@ -1,6 +1,6 @@
 const FS = require('./ForceService.js');
 const ASYNC = require('async');
-
+const GAMEID = process.env.GAMEID;
 
 module.exports = {
     getMetadata: function (object, callBack) {
@@ -167,14 +167,13 @@ module.exports = {
         Object.keys(obj.clauses).forEach((val, ind) => {
             query = query + " " + val + " = " + obj.clauses[val] + " and ";
         });
-
-        query = query + obj.subQuerySelector + " in ( select id from " + obj.subQuerySelector + "where id = \'" + id + "\' ) ORDER BY CreatedDate DESC limit " + obj.limit + " OFFSET " + obj.offset;
+        
+        query = query + " Player_ID__c = \'" + id + "\' and Game_ID__c =\'" + GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + obj.limit + " OFFSET " + obj.offset;
 
         FS.Query(query, function (err, data) {
             if (err) {
                 return callBack(err, null);
             }
-
             return callBack(null, data.records);
         });
     }

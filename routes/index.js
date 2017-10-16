@@ -88,13 +88,14 @@ router.get('/rules/:id', (req, res) => {
     MODULES.scores.getLatestAttempts(req.params.id, (err, attempts) => {
         if (err) {
             console.info('Error while getting attempts');
+            console.log(err);
             return res.render('/');
         }
 
         // Form data before sending it to rules page
 
         res.render('rules', {
-            attempts: data,
+            attempts: JSON.stringify(attempts),
             playerID: req.params.id
         });
     });

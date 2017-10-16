@@ -28,12 +28,12 @@
         ]
     },
     "lastAttemptDetails" : {
-        "details" : ["Correct_Answers__c", "Final_Score__c", "Id", "Name", "Negative_Tokens_Caught__c", "Player__c", "Positive_Tokens_Caught__c", "Time_Taken__c", "Token_Points__c", "Total_Questions_Attempted__c", "Total_Tokens_Caught__c"],
+        "details" : ["Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Question_Answer_Ratio__c", "Time_Ratio__c", "Time_Taken__c", "Total_Questions_Attempted__c"],
         "offset" : 0,
         "limit" : 2,
-        "from" : "Player_Attempt__c",
+        "from" : "LSHC_Player_Attempts__c",
         "clauses" : {
-            "Attempt_Completed__c" : false
+            "Attempt_Completed__c" : true
         },
         "subQuerySelector" : "Players__c"
     }
