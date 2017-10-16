@@ -41,7 +41,11 @@ module.exports = {
     },
     getLatestAttempts : (id, callBack) => {
         const OBJ_DETAILS = config.lastAttemptDetails;        
-        service.fetchAttempts(id, OBJ_DETAILS, callBack);
+        service.fetchAttempts(id, OBJ_DETAILS, config.latestAttempts, callBack);
+    },
+    getLastAttempt : (id, callBack) => {
+        const OBJ_DETAILS = config.lastAttemptDetails;        
+        service.fetchAttempts(id, OBJ_DETAILS, 1, callBack);
     },
     createPlayer : (info, callBack) => {
         const OBJ_DETAILS = {
@@ -49,15 +53,22 @@ module.exports = {
             identifier: config.playerIdentifier
         };
         // Check if player is present and then create if present
-        service.checkPlayer(info, OBJ_DETAILS, (err, playerID) => {
+        service.checkPlayer(info, OBJ_DETAILS, (err, playerPresent, playerID) => {
             if (err) {
                 console.log('Error while creating player');
                 console.log(err);
                 return callBack(err, null);
             }
 
-            // Gets the ID of player created
-            callBack(null, playerID)
+            if (playerPresent) {
+                callBack(null, playerID);
+            } else {
+                service.createPlayer(OBJ_DETAILS.name, info, callBack);
+            }
         });
+    },
+    getPlayerDetails : (id, callBack) => {
+        const OBJ_DETAILS = config.details;        
+        service.getPlayerDetails(id, OBJ_DETAILS, callBack);
     }
 }

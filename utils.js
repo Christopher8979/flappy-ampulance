@@ -11,5 +11,17 @@ module.exports = {
             len--;
         }
         return temp;
+    },
+    limitTo : (limit, array) => {
+        
+        const newAr = [];
+        
+        array.forEach((val, index) => {
+            if (index < limit) {
+                newAr.push(val);
+            }
+        });
+
+        return newAr;
     }
 };
