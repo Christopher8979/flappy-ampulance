@@ -144,20 +144,6 @@ router.get('/contributors', (req, res) => {
 
 });
 
-
-router.get('/questions', (req, res) => {
-    MODULES.questions.getQuestions((err, questions) => {
-        if (err) {
-            return res.status(500).jsonp({
-                status: 'error while fetching questions',
-                error: err
-            });
-        }
-
-        res.status(200).jsonp(questions);
-    });
-});
-
 router.get('/*', function (req, res) {
     res.redirect('/');
 });
