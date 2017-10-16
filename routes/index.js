@@ -133,7 +133,42 @@ router.post('/check-answer/:attempt/:id', (req, res) => {
 });
 
 router.get('/game-over/:id', (req, res) => {
+    if (!(req.params && req.params.id)) {
+        return res.render('400', 'No params in rules page');
+    }
 
+    MODULES.scores.getLastAttempt(req.params.id, (err, attemptData) => {
+        if (err) {
+            console.info('Error while getting last attempt');
+            return res.render('/');
+        }
+
+        MODULES.scores.getPlayerDetails(attemptData[0].Player_Name__c, function (err, playerInfo) {
+            if (err) {
+                console.info('Error while getting player details');
+                return res.render('/');
+            }
+
+            MODULES.scores.getHighScorrer(function (err, winnerInfo) {
+                if (err) {
+                    console.info('Error while getting winner');
+                    return res.render('/');
+                }
+                var topScorrer = {
+                    name: winnerInfo.Player__r.Name,
+                    email: winnerInfo.Player__r.Email__c,
+                    score: winnerInfo.Final_Score__c
+                };
+
+                res.render('game-over', {
+                    lastAttempts: JSON.stringify(attemptData[0]),
+                    topScorrer: JSON.stringify(topScorrer),
+                    player: JSON.stringify(playerInfo[0])
+                });
+            });
+        });
+
+    });
 });
 
 router.post('/saveAttempt/:id', (req, res) => {

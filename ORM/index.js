@@ -14,7 +14,7 @@ module.exports = {
         });
     },
     getQuestions: (gameID, callBack) => {
-        
+
         var query = "SELECT id, a__c, b__c, c__c, d__c, Hint__c, Question__c FROM LSHC_Question__c WHERE LSHC_Game__r.Name = \'" + GAMEID + "\'";
 
         FS.Query(query, function (err, data) {
@@ -93,13 +93,7 @@ module.exports = {
     },
     completeIncompleteAttempts: (id, obj, callBack) => {
 
-        let getUncheckedRecordsQuery = "Select ";
-
-        obj.getThese.forEach((val, ind) => {
-            getUncheckedRecordsQuery = getUncheckedRecordsQuery + val + ", ";
-        });
-
-        getUncheckedRecordsQuery = getUncheckedRecordsQuery.substring(0, getUncheckedRecordsQuery.length - 2);
+        let getUncheckedRecordsQuery = "Select " + obj.details.join(", ");
 
         getUncheckedRecordsQuery = getUncheckedRecordsQuery + " From " + obj.objName + " where ";
 
@@ -155,27 +149,33 @@ module.exports = {
             callBack(null, resp);
         });
     },
-    getAttempts: (id, obj, callBack) => {
-        let query = "Select ";
-
-        obj.details.forEach((val, ind) => {
-            query = query + val + ", ";
-        });
-
-        query = query.substring(0, query.length - 2);
+    getAttempts: (id, obj, noOfAttempts, callBack) => {
+        let query = "Select " + obj.details.join(", ");
 
         query = query + " From " + obj.from + " where ";
 
         Object.keys(obj.clauses).forEach((val, ind) => {
             query = query + " " + val + " = " + obj.clauses[val] + " and ";
         });
-        
-        query = query + " Player_ID__c = \'" + id + "\' and Game_ID__c =\'" + GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + obj.limit + " OFFSET " + obj.offset;
+
+        query = query + " Player_ID__c = \'" + id + "\' and Game_ID__c =\'" + GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
 
         FS.Query(query, function (err, data) {
             if (err) {
                 return callBack(err, null);
             }
+            return callBack(null, data.records);
+        });
+    },
+    fetchRecordByID: (id, obj, callBack) => {
+        var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where id = \'" + id + "\'";
+
+        FS.Query(query, function (err, data) {
+            if (err) {
+                console.info('error while getting questions from SFDC');
+                return callBack(err, null);
+            }
+
             return callBack(null, data.records);
         });
     }

@@ -41,7 +41,11 @@ module.exports = {
     },
     getLatestAttempts : (id, callBack) => {
         const OBJ_DETAILS = config.lastAttemptDetails;        
-        service.fetchAttempts(id, OBJ_DETAILS, callBack);
+        service.fetchAttempts(id, OBJ_DETAILS, config.latestAttempts, callBack);
+    },
+    getLastAttempt : (id, callBack) => {
+        const OBJ_DETAILS = config.lastAttemptDetails;        
+        service.fetchAttempts(id, OBJ_DETAILS, 1, callBack);
     },
     createPlayer : (info, callBack) => {
         const OBJ_DETAILS = {
@@ -62,5 +66,9 @@ module.exports = {
                 service.createPlayer(OBJ_DETAILS.name, info, callBack);
             }
         });
+    },
+    getPlayerDetails : (id, callBack) => {
+        const OBJ_DETAILS = config.details;        
+        service.getPlayerDetails(id, OBJ_DETAILS, callBack);
     }
 }

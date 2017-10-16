@@ -16,8 +16,8 @@ let thisService = {
     saveAttempt : (id, data, objName, callBack) => {
         ORM.updateRecord(id, data, objName, callBack);
     },
-    fetchAttempts : (id, obj, callBack) => {
-        ORM.getAttempts(id, obj, callBack);
+    fetchAttempts : (id, obj, noOfAttempts, callBack) => {
+        ORM.getAttempts(id, obj, noOfAttempts, callBack);
     },
     checkPlayer : (data, objDetails, callBack) => {
         ORM.checkRecords(objDetails.name, objDetails.identifier, data.Email__c, (err, isPresent, ID) => {
@@ -39,6 +39,9 @@ let thisService = {
                 callBack(null, createResp);
             }
         });
+    },
+    getPlayerDetails : (id, obj, callBack) => {
+        ORM.fetchRecordByID(id, obj, callBack);
     }
 };
 
