@@ -71,10 +71,10 @@ module.exports = {
             }
 
             if (!showAns) {
-                delete resp.correctOption;
+                delete response.correctOption;
             }
             
-            callBack(null, resp);
+            callBack(null, response);
         });
     }
 };

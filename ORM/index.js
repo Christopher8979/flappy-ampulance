@@ -14,7 +14,8 @@ module.exports = {
         });
     },
     getQuestions: (gameID, callBack) => {
-        var query = "Select id, Question_1__c, a__c, b__c, c__c, d__c, hint__c from Question__c";
+        
+        var query = "SELECT id, a__c, b__c, c__c, d__c, Hint__c, Question__c FROM LSHC_Question__c WHERE LSHC_Game__r.Name = \'" + GAMEID + "\'";
 
         FS.Query(query, function (err, data) {
             if (err) {
@@ -25,7 +26,8 @@ module.exports = {
         });
     },
     checkAnswer: (id, answered, callBack) => {
-        var query = "Select a__c, b__c, c__c, d__c, correct_answer__c from Question__c where id = \'" + id + "\'";
+
+        var query = "SELECT a__c, b__c, c__c, d__c, Correct_Answer_c__c FROM LSHC_Question__c WHERE LSHC_Game__r.Name = \'" + GAMEID + "\' and id = \'" + id + "\'";
 
         FS.Query(query, function (err, data) {
             if (err) {
@@ -34,10 +36,10 @@ module.exports = {
 
             let resp = {
                 answeredCorrect: false,
-                correctOption: data.records[0].Correct_Answer__c
+                correctOption: data.records[0].Correct_Answer_c__c
             };
 
-            if (data.records[0][data.records[0].Correct_Answer__c + '__c'] === answered) {
+            if (data.records[0][data.records[0].Correct_Answer_c__c + '__c'] === answered) {
                 resp.answeredCorrect = true;
             }
 

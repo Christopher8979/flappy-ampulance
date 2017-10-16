@@ -10,6 +10,7 @@ Questions = {
         service.getQuestions(config.randomizeQuestions, config.randomizeOptions, callBack);
     },
     checkAnswer: (id, answer, callBack) => {
+        // Save data in SFDC.
         service.checkAnswer(id, answer, config.showAnswer, callBack);
     },
     getLimitedQuestions: (number, callBack) => {

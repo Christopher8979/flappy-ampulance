@@ -1,5 +1,5 @@
 {
-    "randomizeQuestions": false,
+    "randomizeQuestions": true,
     "randomizeOptions": true,
     "showAnswer": true
 }
