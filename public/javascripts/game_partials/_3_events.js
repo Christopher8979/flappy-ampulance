@@ -1,5 +1,5 @@
 function initEvents() {
-    $(document).on("click", function (e) {
+    $("#game-holder").on("click", function (e) {
         screenClick();
     })
 
