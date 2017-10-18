@@ -1,0 +1,64 @@
+/* Landing */
+.landing {
+
+    .top-scorer {
+        padding: 30px;
+        position: relative;
+        
+        .label {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: grey;
+        }
+        
+        .name {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .email {
+            color: #2E7D32;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-left: 30px;
+            color: #e1ae14;
+        }
+        
+        &:before {
+            content: "";
+            display: block;
+            clear: both;
+            position: absolute;
+            top: -29px;
+            right: -21px;
+            background: url("/images/landing_crown.png");
+            width: 87px;
+            height: 69px;
+            background-size: contain;
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: pop-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+        }
+    }
+}
+
+
+
+
+@keyframes pop-in {
+    0% {
+        transform: translate(0, -30px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0,0);
+        opacity: 1;
+    }
+}
