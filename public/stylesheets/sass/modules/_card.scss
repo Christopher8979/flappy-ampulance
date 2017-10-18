@@ -4,6 +4,13 @@
     padding: 10px;
     border-radius: 4px;
     margin: 20px;
+    position: relative;
+
+    &:after, &:before {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .default-z {
