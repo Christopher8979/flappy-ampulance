@@ -14,8 +14,35 @@
         </div>
         <div class="col">
             <div class="card default-z login">
-                <h1>{{title}}</h1>
-                <p>Welcome to {{title}}</p>
+                <img src="/images/title.png" alt="Flappy Ambulance">
+                <form action="#">
+
+                    {{!-- Name --}}
+                    <div class="group">
+                        <input type="text" required>
+                        <span class="bar"></span>
+                        <label>Name</label>
+                    </div>
+
+                    {{!-- Email --}}
+                    <div class="group">
+                        <input type="text" required>
+                        <span class="bar"></span>
+                        <label>Email</label>
+                    </div>
+
+                    <select name="serviceLine" id="serviceLine">
+                        <option value="dd">Deliotte Digital</option>
+                        <option value="ams">AMS</option>
+                        <option value="si">SI</option>
+                    </select>
+
+
+                </form>
+
+                <button id="start-game" class="submit">
+                    Start Game
+                </button>
             </div>
         </div>
     </div>
