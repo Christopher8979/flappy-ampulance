@@ -11,8 +11,17 @@ npm install
 ```
 
 ## Usage
+two windows are required for the application to run
+- a gulp task to compile and watch the build files
+- a Heroku task to startup the server
 
 ```
+gulp
+```
+and
+
+```
+heroku local
 ```
 
 ## Contribute
