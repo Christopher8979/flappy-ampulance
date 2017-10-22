@@ -367,3 +367,35 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   transform: translate(-50%, -50%);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
   border-radius: 5px; }
+
+.flex-center, .game-end .holder .card > div, .game-end .holder .card .history > div {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.game-end {
+  margin: 4rem 0;
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  justify-content: center; }
+  .game-end .holder {
+    width: 70%;
+    display: flex; }
+    .game-end .holder .card {
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex: 1; }
+      .game-end .holder .card .history {
+        background: #131313;
+        flex-grow: 4;
+        flex-direction: column;
+        align-items: stretch; }
+        .game-end .holder .card .history .latest-score {
+          flex-grow: 7.5;
+          background: #1f1e1e; }
+        .game-end .holder .card .history .high-scorrer {
+          flex-grow: 2.5; }
+      .game-end .holder .card .summary {
+        flex-grow: 6; }

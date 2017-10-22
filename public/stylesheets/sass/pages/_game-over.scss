@@ -1,0 +1,55 @@
+
+.flex-center {
+    display: flex;                
+    align-items: center;              
+    justify-content: center;
+}
+
+.game-end {
+    margin: 4rem 0;
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: center;
+
+
+    .holder {
+        width: 70%;
+        display: flex;
+
+        .card{
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex: 1;
+            
+            & > div {
+                @extend .flex-center;
+            }
+
+            .history {
+                background: rgb(19, 19, 19);
+                flex-grow: 4;
+                flex-direction: column;
+                align-items: stretch;              
+                
+                & > div {
+                    @extend .flex-center;                    
+                }
+
+                .latest-score {
+                    flex-grow: 7.5;
+                    background: #1f1e1e;
+                }
+
+                .high-scorrer {
+                    flex-grow: 2.5;
+                }
+            }
+
+            .summary {
+                flex-grow: 6;
+            }
+        }        
+    }
+}
