@@ -44,6 +44,26 @@
 
                 .high-scorrer {
                     flex-grow: 2.5;
+
+                    .content {
+                        width: 80%;
+                        @extend .flex-center;
+                        align-items: flex-end;
+
+                        & > div {
+                            @extend .flex-center;
+                            flex-grow: 5;
+                            flex-direction: column;
+                            align-items: flex-end;
+                        }
+
+                        & > h1 {
+                            flex-grow: 5;
+                            text-align: right;
+                            font-size: 3rem;
+                            margin: 0;
+                        }
+                    }
                 }
             }
 

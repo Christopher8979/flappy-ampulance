@@ -21,6 +21,21 @@ body {
   left: 10px;
   width: 100px; }
 
+.text-white {
+  color: #fff; }
+
+.text-green {
+  color: green; }
+
+.text-yellow {
+  color: yellow; }
+
+.text-ash {
+  color: #666666; }
+
+.upper-case {
+  text-transform: uppercase; }
+
 /* Grid */
 .main {
   height: 100vh; }
@@ -368,7 +383,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
   border-radius: 5px; }
 
-.flex-center, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
+.flex-center, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
   display: flex;
   align-items: center;
   justify-content: center; }
@@ -397,6 +412,18 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
           background: #1f1e1e; }
         .game-end .holder .card .history .high-scorrer {
           flex-grow: 2.5; }
+          .game-end .holder .card .history .high-scorrer .content {
+            width: 80%;
+            align-items: flex-end; }
+            .game-end .holder .card .history .high-scorrer .content > div {
+              flex-grow: 5;
+              flex-direction: column;
+              align-items: flex-end; }
+            .game-end .holder .card .history .high-scorrer .content > h1 {
+              flex-grow: 5;
+              text-align: right;
+              font-size: 3rem;
+              margin: 0; }
       .game-end .holder .card .summary {
         flex-grow: 5.5;
         flex-direction: column; }
