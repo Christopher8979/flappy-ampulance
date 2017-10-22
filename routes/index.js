@@ -143,7 +143,7 @@ router.get('/game-over/:id', (req, res) => {
             return res.render('/');
         }
 
-        MODULES.scores.getPlayerDetails(attemptData[0].Player_Name__c, function (err, playerInfo) {
+        MODULES.scores.getPlayerDetails(req.params.id, function (err, playerInfo) {
             if (err) {
                 console.info('Error while getting player details');
                 return res.render('/');

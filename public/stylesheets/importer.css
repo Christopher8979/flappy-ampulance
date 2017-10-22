@@ -21,6 +21,21 @@ body {
   left: 10px;
   width: 100px; }
 
+.text-white {
+  color: #fff; }
+
+.text-green {
+  color: green; }
+
+.text-yellow {
+  color: yellow; }
+
+.text-ash {
+  color: #666666; }
+
+.upper-case {
+  text-transform: uppercase; }
+
 /* Grid */
 .main {
   height: 100vh; }
@@ -367,3 +382,60 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   transform: translate(-50%, -50%);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
   border-radius: 5px; }
+
+.flex-center, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.game-end {
+  margin: 4rem 0;
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  justify-content: center; }
+  .game-end .holder {
+    width: 70%;
+    display: flex; }
+    .game-end .holder .card {
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex: 1; }
+      .game-end .holder .card .history {
+        background: #131313;
+        flex-grow: 4.5;
+        flex-direction: column;
+        align-items: stretch; }
+        .game-end .holder .card .history .latest-score {
+          flex-grow: 6;
+          background: #1f1e1e;
+          flex-direction: column; }
+          .game-end .holder .card .history .latest-score h1 {
+            margin: 0.1rem 0;
+            margin-top: 1rem; }
+        .game-end .holder .card .history .high-scorrer {
+          flex-grow: 4; }
+          .game-end .holder .card .history .high-scorrer .content {
+            width: 80%;
+            align-items: flex-end; }
+            .game-end .holder .card .history .high-scorrer .content > div {
+              flex-grow: 5;
+              flex-direction: column;
+              align-items: flex-end; }
+            .game-end .holder .card .history .high-scorrer .content > h1 {
+              flex-grow: 5;
+              text-align: right;
+              font-size: 3rem;
+              margin: 0; }
+      .game-end .holder .card .summary {
+        flex-grow: 5.5;
+        flex-direction: column; }
+        .game-end .holder .card .summary h1 {
+          font-size: 2.5rem; }
+        .game-end .holder .card .summary .score-details {
+          flex-direction: column;
+          align-items: stretch; }
+          .game-end .holder .card .summary .score-details > span {
+            justify-content: space-between;
+            font-size: 1.25rem; }
