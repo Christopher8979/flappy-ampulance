@@ -73,7 +73,8 @@
             width: 100%;
             border: none;
             outline: none;
-
+            margin-top: 5px;
+            
             &:active {
                 background: linear-gradient(#eebb1d, #FFC107);
             }
@@ -95,5 +96,33 @@
     100% {
         transform: translate(0,0);
         opacity: 1;
+    }
+}
+
+.error {
+    & > label {
+        display: none;
+        color: #e24040;
+    }
+
+    &.email {
+        .email {
+            display: block;
+        }
+    }
+    &.name {
+        .name {
+            display: block;
+        }
+    }
+    &.service {
+        .service {
+            display: block;
+        }
+    }
+    &.fill-all {
+        .fill-all {
+            display: block;
+        }
     }
 }

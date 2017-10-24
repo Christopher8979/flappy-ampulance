@@ -4,43 +4,49 @@
             <div class="card default-z top-scorer">
                 <div class="label">Current Top Scorer</div>
                 <div class="inline-block">
-                    <div class="name">Ashwin P Chandran</div>
-                    <div class="email">ashchandran@deloitte.com</div>
+                    <div class="name">{{topScorrer.name}}</div>
+                    <div class="email">{{topScorrer.email}}</div>
                 </div>
                 <div class="inline-block">
-                    <div class="score">230</div>
+                    <div class="score">{{topScorrer.score}}</div>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card default-z login">
                 <img src="/images/game_name.png" alt="Flappy Ambulance">
-                <form action="#">
+                <form id="credForm">
 
                     {{!-- Name --}}
                     <div class="group">
-                        <input type="text" required>
+                        <input type="text" required autocomplete="off" id="name" data-params="Player_Name__c">
                         <span class="bar"></span>
                         <label>Name</label>
                     </div>
 
                     {{!-- Email --}}
                     <div class="group">
-                        <input type="text" required>
+                        <input type="email" autocomplete="off" id="email" required data-params="Email__c">
                         <span class="bar"></span>
                         <label>Email</label>
                     </div>
 
-                    <select name="serviceLine" id="serviceLine">
-                        <option value="dd">Deliotte Digital</option>
-                        <option value="ams">AMS</option>
-                        <option value="si">SI</option>
+                    <select name="serviceLine" id="serviceLine" data-params="Service_Line__c">
+                        <option value="" disabled selected>Choose your Service Line</option>
+                        {{#each serviceLineOptions}}
+                            <option value="{{value}}">{{label}}</option>
+                        {{/each}}
                     </select>
 
-
+                    <div class="group error">
+                        <label for="" class="fill-all">All fields are required</label>
+                        <label for="" class="name">Name should contain only alphabets</label>
+                        <label for="" class="email">Email has to be of the format xxx@xxx.xxx</label>
+                        <label for="" class="service">Select a service line</label>
+                    </div>
                 </form>
 
-                <button id="start-game" class="submit">
+                <button id="enterGame" class="submit">
                     Start Game
                 </button>
             </div>
