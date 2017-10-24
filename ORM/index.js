@@ -74,10 +74,10 @@ module.exports = {
 
         return callBack(null, {
             Player__r: {
-                Name: "",
-                Email__c: ""
+                Name: "Ashwin P Chandran",
+                Email__c: "ashchandran@deloitte.com"
             },
-            Final_Score__c: ""
+            Final_Score__c: "2314"
         });
 
         var query = "SELECT * FROM " + objDetails.name + " where " + objDetails.flag + " = " + objDetails.value + " AND ORDER BY CreatedDate DESC limit " + playerCount + " OFFSET " + offset;
