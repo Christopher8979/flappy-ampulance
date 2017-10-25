@@ -159,6 +159,6 @@ $(document).on("initialize-socket", function () {
     })
 
     socket.on("game-over", function () {
-        window.location = "/"
+        window.location = "/game-over/" + window.location.pathname.split("/").pop()
     })
 })

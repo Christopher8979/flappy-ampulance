@@ -75,6 +75,8 @@ module.exports = (io) => {
                 return socket.emit('mismatch')
             }
 
+            // TODO: Create an attempt here
+
             socket.emit('game-over');
         })
     });
