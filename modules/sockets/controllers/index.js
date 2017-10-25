@@ -14,22 +14,21 @@ module.exports = (io) => {
     io.on('connection', (socket) => {
 
         // on connection, we add a key with unique ID created which will hold the number of pipes user has passed
-        const IDENTIFIER = socket.id;
-
-        socket[IDENTIFIER] = 0;
+        socket.score = 0;
+        socket.correct = 0;
 
         socket.on('crash', (data) => {
             // Data has to be processed before using it further
-            id = decodeData(data.id);
-            attemptID = decodeData(data.attemptID);
-            pipesPassed = decodeData(data.pipesPassed);
+            // TODO: if added signing, do it here
 
             // get pipespassed from session and check with the value that is sent
             // If session pipe count and pipe count sent from front end is same then user has not cheated
+            if (data.pipesPassed !== socket.score) {
+                return socket.emit('mismatch')
+            }
 
             // If condition is to be written here
-            questions.getLimitedQuestions(pipesPassed, (e, questions) => {
-
+            questions.getLimitedQuestions(data.pipesPassed, (e, questions) => {
                 socket.emit('fetchedQuestions', questions);
             });
 
@@ -47,7 +46,7 @@ module.exports = (io) => {
             // pipe score - no purpose for now as we as anyways storing in redis
             // Increment pipe value in session
 
-            socket[IDENTIFIER]++;
+            socket.score++;
 
         });
 
@@ -55,5 +54,28 @@ module.exports = (io) => {
             // This method gets called when a socket is closed i.e., when browser is closed.
             // Check if the latest attempt is complete, else close the attempt
         });
+
+        socket.on('checkAnswer', (data) => {
+            // data has id and answer
+            questions.checkAnswer(data.id, data.answer, (err, result) => {
+                if (err) {
+                    return socket.emit('error')
+                }
+
+                if (result.answeredCorrect) {
+                    socket.correct++
+                }
+
+                socket.emit('answer', result)
+            })
+        })
+
+        socket.on('quiz-done', (correct) => {
+            if (correct !== socket.correct) {
+                return socket.emit('mismatch')
+            }
+
+            socket.emit('game-over');
+        })
     });
 };

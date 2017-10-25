@@ -134,3 +134,31 @@ function addPipe() {
 
     stage.addChildAt(pipe, 1)
 }
+
+$(document).on("initialize-socket", function () {
+    socket = io();
+
+    socket.on('fetchedQuestions', function (questions) {
+        console.log(questions);
+        quiz.loadQuestions(questions)
+        quiz.showNextQuestion()
+    });
+
+    socket.on("mismatch", function () {
+        window.alert("There was a discrepancy in your score, try again")
+        window.location = '/'
+    })
+
+    socket.on("error", function () {
+        toast("Something went wrong, try again");
+    })
+
+    socket.on("answer", function (data) {
+        console.log(data);
+        quiz.checkedAnswer(data)
+    })
+
+    socket.on("game-over", function () {
+        window.location = "/"
+    })
+})
