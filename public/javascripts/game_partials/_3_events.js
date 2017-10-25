@@ -40,8 +40,12 @@ function playerJump() {
 function playerDead() {
     currentstate = states.ScoreScreen;
     createjs.Ticker.off("tick", gameTicker);
+    socket.emit("crash", {
+        pipesPassed: score
+    });
 }
 
 function updateScore() {
     scoreText.text = score;
+    socket.emit("cross", (Math.random() + score));
 }

@@ -5,7 +5,8 @@ var gameFloor, gameCeil, rotation = 0;
 var states = Object.freeze({
     SplashScreen: 0,
     GameScreen: 1,
-    ScoreScreen: 2
+    QuizScreen: 2,
+    ScoreScreen: 3
  });
 var currentstate;
 var gameTicker;
@@ -37,3 +38,4 @@ var IMAGE_HOLDER = [
     }
 ]
 
+var socket;

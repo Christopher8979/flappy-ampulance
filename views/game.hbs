@@ -1,1 +1,18 @@
 <canvas id="game-holder" width="700" height="600"></canvas>
+
+<div class="question-frame">
+    <div id="question-box" class="card default-z question-box">
+        <div class="tally"><span class="correct">0</span>/<span class="total">10</span></div>
+        <div class="question">Some Question that is very comple?</div>
+        <div class="options">
+            <div class="option"><input type="radio" name="option" id="a__c" value="a__c"> <span></span></div>
+            <div class="option"><input type="radio" name="option" id="b__c" value="b__c"> <span></span></div>
+            <div class="option"><input type="radio" name="option" id="c__c" value="c__c"> <span></span></div>
+            <div class="option"><input type="radio" name="option" id="d__c" value="d__c"> <span></span></div>
+        </div>
+        <div class="action">
+            <button onclick="quiz.checkAnswer()">Next</button>
+        </div>
+    </div>
+    <div class="backdrop"></div>
+</div>
