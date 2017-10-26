@@ -28,7 +28,7 @@
         ]
     },
     "lastAttemptDetails" : {
-        "details" : ["Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Question_Answer_Ratio__c", "Time_Ratio__c", "Time_Taken__c", "Total_Questions_Attempted__c"],
+        "details" : ["No_of_Pipes_Passed__c", "Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Question_Answer_Ratio__c", "Time_Ratio__c", "Time_Taken__c", "Total_Questions_Attempted__c", "Hidden_Multiplier__c"],
         "offset" : 0,
         "from" : "LSHC_Player_Attempts__c",
         "clauses" : {
@@ -36,6 +36,7 @@
         },
         "subQuerySelector" : "Players__c"
     },
+    "latestAttempts" : 2,
     "details" : {
         "object" : "LSHC_Player__c",
         "details" : ["Email__c", "Player_Name__c", "Service_Line__c"]

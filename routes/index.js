@@ -143,27 +143,30 @@ router.get('/game-over/:id', (req, res) => {
             return res.render('/');
         }
 
-        MODULES.scores.getPlayerDetails(req.params.id, function (err, playerInfo) {
+        MODULES.scores.getPlayerDetails(req.params.id, (err, playerInfo) => {
             if (err) {
                 console.info('Error while getting player details');
                 return res.render('/');
             }
 
-            MODULES.scores.getHighScorrer(function (err, winnerInfo) {
+            MODULES.scores.getHighScorrer((err, winnerInfo) => {
                 if (err) {
                     console.info('Error while getting winner');
                     return res.render('/');
                 }
+                
                 var topScorrer = {
                     name: winnerInfo.Player__r.Name,
                     email: winnerInfo.Player__r.Email__c,
-                    score: winnerInfo.Final_Score__c
+                    score: winnerInfo.Final_Score__c,
+                    serviceLine: winnerInfo.Service_Line__c
                 };
 
+
                 res.render('game-over', {
-                    lastAttempts: JSON.stringify(attemptData[0]),
-                    topScorrer: JSON.stringify(topScorrer),
-                    player: JSON.stringify(playerInfo[0])
+                    lastAttempts: attemptData[0],
+                    topScorrer: topScorrer,
+                    player: playerInfo[0]
                 });
             });
         });

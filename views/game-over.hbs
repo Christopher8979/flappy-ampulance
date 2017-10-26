@@ -5,18 +5,18 @@
                 <div class="history">
                     <div class="latest-score">
                         <img src="../images/cup.png" alt="">
-                        <h1 class="text-white">1020</h1>
-                        <span class="text-white">Ashwin P chandra</span>
-                        <span class="text-green">ashwin@deloitte.com</span>
+                        <h1 class="text-white">{{lastAttempts.Final_Score__c}}</h1>
+                        <span class="text-white">{{player.Player_Name__c}}</span>
+                        <span class="text-green">{{player.Email__c}}</span>
                     </div>
                     <div class="high-scorrer">
                         <div class="content">
                             <div>
-                                <span class="text-white upper-case">Ashwin Chandra</span>
-                                <span class="text-green">ashChandra@del.com</span>
-                                <span class="text-ash">Deloitte Digital</span>
+                                <span class="text-white upper-case">{{topScorrer.name}}</span>
+                                <span class="text-green">{{topScorrer.email}}</span>
+                                <span class="text-ash">{{topScorrer.serviceLine}}</span>
                             </div>
-                            <h1 class="text-yellow">1020</h1>
+                            <h1 class="text-yellow">{{topScorrer.score}}</h1>
                         </div>
                     </div>
                 </div>
@@ -25,22 +25,22 @@
                     <div class="score-details">
                         <span>
                             <span>Pipes Passed &nbsp;</span>
-                            <span>10</span>
+                            <span>{{lastAttempts.No_of_Pipes_Passed__c}}</span>
                         </span>
                         <span>
                             <span>Questions Attempted &nbsp;</span>
-                            <span>10</span>
+                            <span>{{lastAttempts.Total_Questions_Attempted__c}}</span>
                         </span>
                         <span>
                             <span>Correct Answers &nbsp;</span>
-                            <span>8</span>
+                            <span>{{lastAttempts.Answered_Correct__c}}</span>
                         </span>
                         <span>
                             <span>Hidden Multiplier &nbsp;&nbsp;</span>
-                            <span>1.5</span>
+                            <span>{{lastAttempts.Hidden_Multiplier__c}}</span>
                         </span>
                     </div>
-                    <h1>TOTAL SCORE - 120</h1>
+                    <h1>TOTAL SCORE - {{lastAttempts.Final_Score__c}}</h1>
                 </div>
             </div>
         </div>
