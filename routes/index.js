@@ -82,14 +82,14 @@ router.post('/checkUser', (req, res) => {
 router.get('/rules/:id', (req, res) => {
 
     if (!(req.params && req.params.id)) {
-        return res.render('/');
+        return res.redirect('/');
     }
 
     MODULES.scores.getLatestAttempts(req.params.id, (err, attempts) => {
         if (err) {
             console.info('Error while getting attempts');
             console.log(err);
-            return res.render('/');
+            return res.redirect('/');
         }
 
         // Form data before sending it to rules page
@@ -110,28 +110,6 @@ router.get('/play-game/:id', function (req, res) {
     });
 });
 
-
-router.post('/check-answer/:attempt/:id', (req, res) => {
-
-    if (!(req.params && req.params.attempt && req.params.id)) {
-        return res.render('error', 'Proper params are not provided');
-    }
-
-    const questionNo = req.params.id;
-    const answeredAs = req.body.answeredAs;
-    const attemptID = req.params.attempt;
-
-    MODULES.questions.checkAnswer(questionNo, answeredAs, (err, response) => {
-        if (err) {
-            console.info('Error wihile checking answers');
-            console.log(err);
-            return res.status(400).jsonp(err);
-        }
-
-        res.status(200).jsonp(response);
-    });
-});
-
 router.get('/game-over/:id', (req, res) => {
     if (!(req.params && req.params.id)) {
         return res.render('400', 'No params in rules page');
@@ -140,19 +118,19 @@ router.get('/game-over/:id', (req, res) => {
     MODULES.scores.getLastAttempt(req.params.id, (err, attemptData) => {
         if (err) {
             console.info('Error while getting last attempt');
-            return res.render('/');
+            return res.redirect('/');
         }
 
         MODULES.scores.getPlayerDetails(req.params.id, (err, playerInfo) => {
             if (err) {
                 console.info('Error while getting player details');
-                return res.render('/');
+                return res.redirect('/');
             }
 
             MODULES.scores.getHighScorrer((err, winnerInfo) => {
                 if (err) {
                     console.info('Error while getting winner');
-                    return res.render('/');
+                    return res.redirect('/');
                 }
                 
                 var topScorrer = {
