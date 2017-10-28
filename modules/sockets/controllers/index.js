@@ -5,6 +5,7 @@ const service = require('../services');
 const config = require('../config.json');
 
 const questions = require('../../questions/controllers');
+const scoring = require('../../scoring/controllers');
 
 const decodeData = (text) => {
     return text;
@@ -16,7 +17,8 @@ module.exports = (io) => {
         // on connection, we add a key with unique ID created which will hold the number of pipes user has passed
         socket.score = 0;
         socket.correct = 0;
-
+        socket.attempted = 0;
+        
         socket.on('crash', (data) => {
             // Data has to be processed before using it further
             // TODO: if added signing, do it here
@@ -53,6 +55,7 @@ module.exports = (io) => {
         socket.on('disconnecting', (reason) => {
             // This method gets called when a socket is closed i.e., when browser is closed.
             // Check if the latest attempt is complete, else close the attempt
+            console.log('Game ended', reason);
         });
 
         socket.on('checkAnswer', (data) => {
@@ -65,8 +68,20 @@ module.exports = (io) => {
                 if (result.answeredCorrect) {
                     socket.correct++
                 }
+                socket.attempted++;
 
-                socket.emit('answer', result)
+                socket.emit('answer', result);
+                // This implies that user has attempted all the questions that he is given with
+                if (socket.attempted === socket.score || socket.attempted == process.env.MAX_QUESTIONS) {
+                    scoring.updateAttempt(data.attempt, details, (err, resp) => {
+                        if (err) {
+                            console.log("error while updating attempt");
+                            return;
+                        }
+
+                        socket.emit('game-over');
+                    });
+                }
             })
         })
 
