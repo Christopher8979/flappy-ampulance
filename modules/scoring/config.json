@@ -18,27 +18,40 @@
         "playerAPI" : "player__c",
         "defaltsForNewRecord" : [
             {
-                "key" : "Correct_Answers__c",
+                "key" : "Answered_Correct__c",
                 "value" : 0
             },
             {
                 "key" : "Total_Questions_Attempted__c",
                 "value" : 0
+            },
+            {
+                "key" : "No_of_Pipes_Passed__c",
+                "value" : 0
             }
         ]
     },
     "lastAttemptDetails" : {
-        "details" : ["No_of_Pipes_Passed__c", "Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Question_Answer_Ratio__c", "Time_Ratio__c", "Time_Taken__c", "Total_Questions_Attempted__c", "Hidden_Multiplier__c"],
+        "details" : ["No_of_Pipes_Passed__c", "Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Total_Questions_Attempted__c", "Hidden_Multiplier__c"],
         "offset" : 0,
         "from" : "LSHC_Player_Attempts__c",
         "clauses" : {
             "Attempt_Completed__c" : true
         },
-        "subQuerySelector" : "Players__c"
+        "subQuerySelector" : "Players__c",
+        "default" : {
+            "No_of_Pipes_Passed__c" : 0,
+            "Answered_Correct__c" : 0,
+            "Final_Score__c" : 0
+        }
     },
     "latestAttempts" : 2,
     "details" : {
         "object" : "LSHC_Player__c",
         "details" : ["Email__c", "Player_Name__c", "Service_Line__c"]
+    },
+    "playerLinkCheck": {
+        "name" : "LSHC_Game_Played__c",
+        "key" : "LSHC_Players__c"
     }
 }

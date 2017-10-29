@@ -6,6 +6,21 @@ let thisService = {
     fetchTopScorrers : (noOfPlayers, offset, obj, callBack) => {
         ORM.fetchTopPlayers(noOfPlayers, offset, obj, callBack);
     },
+    checkPlayerLink: (id, objDetails, callBack) => {
+        ORM.checkRecords(objDetails.name, objDetails.key, id, (err, resp, id) => {
+            if (err) {
+                console.log("Error while checking for game splayed for a player");
+                return callBack(err, null);
+            }
+
+            if (resp) {
+                callBack(null, true, id);
+            } else {
+                callBack(null, false);
+            }
+
+        });
+    },
     createAttempt : (id, data, objDetails, callBack) => {
         // before creating a new attempt check the isComplete flag.
         objDetails.value = data.Player__c;

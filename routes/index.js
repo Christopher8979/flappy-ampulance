@@ -105,9 +105,18 @@ router.get('/play-game/:id', function (req, res) {
     if (!(req.params && req.params.id)) {
         return res.render('error', 'No params in rules page');
     }
-    res.render('game', {
-        title: 'Playing game now'
+
+    MODULES.scores.checkCreatePlayerAttempt(req.params.id, (err, attemptID) => {
+        if (err) {
+            console.log(err);
+            return res.redirect("/");
+        }
+
+        res.render('game', {
+            attemptID: attemptID
+        });
     });
+
 });
 
 router.get('/game-over/:id', (req, res) => {
@@ -132,7 +141,7 @@ router.get('/game-over/:id', (req, res) => {
                     console.info('Error while getting winner');
                     return res.redirect('/');
                 }
-                
+
                 var topScorrer = {
                     name: winnerInfo.Player__r.Name,
                     email: winnerInfo.Player__r.Email__c,
