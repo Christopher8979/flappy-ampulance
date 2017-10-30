@@ -179,5 +179,17 @@ module.exports = {
 
             return callBack(null, data.records);
         });
+    },
+    fetchBestScore : (id, obj, callBack) => {
+        var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where id = \'" + id + "\' AND ORDER BY Final_Score__c DESC limit 1";
+        
+        FS.Query(query, function (err, data) {
+            if (err) {
+                console.info('error while getting questions from SFDC');
+                return callBack(err, null);
+            }
+
+            return callBack(null, data.records);
+        });
     }
 };

@@ -30,6 +30,11 @@ thisController = {
 
         service.fetchTopScorrers(1, 0, OBJ_DETAILS, callBack);
     },
+    getPersonalBest: (id, callBack) => {
+        const OBJ_DETAILS = config.personalBest;
+
+        service.getPersonalBest(id, OBJ_DETAILS, callBack);
+    },
     checkCreatePlayerAttempt: (id, callBack) => {
         const OBJ_DETAILS = config.playerLinkCheck;
         let DEFAULT_ATTEMPT_DATA = config.defaultAttempt;
