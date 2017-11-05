@@ -35,7 +35,7 @@
                 socket.emit("checkAnswer", {
                     id: questions[index - 1].Id,
                     answer: $selectedOption.val(),
-                    attempt: "231adadf233e1e"
+                    attempt: $("#game-holder").data("id")
                 });
             } else {
                 toast("Select an option");

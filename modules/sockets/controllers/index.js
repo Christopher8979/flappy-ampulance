@@ -18,7 +18,7 @@ module.exports = (io) => {
         socket.score = 0;
         socket.correct = 0;
         socket.attempted = 0;
-        
+
         socket.on('crash', (data) => {
             // Data has to be processed before using it further
             // TODO: if added signing, do it here
@@ -36,10 +36,13 @@ module.exports = (io) => {
 
         });
 
-        socket.on('start', () => {
+        socket.on('start', (attemptID) => {
             // Check if this use has a session already existing
             // If yes, clear that session and then create new session
             // Sample/Default session - session[id] = {time: <<timestamp>>, pipespassed: 0}
+
+            console.log("Started game");
+            console.log(attemptID);
         });
 
         socket.on('cross', (currentStatus) => {
@@ -59,6 +62,9 @@ module.exports = (io) => {
         });
 
         socket.on('checkAnswer', (data) => {
+
+            socket.attemptID = data.attempt;
+
             // data has id and answer
             questions.checkAnswer(data.id, data.answer, (err, result) => {
                 if (err) {
@@ -79,20 +85,38 @@ module.exports = (io) => {
                             return;
                         }
 
-                        socket.emit('game-over');
+                        saveAttempt();
                     });
                 }
             })
-        })
+        });
 
         socket.on('quiz-done', (correct) => {
             if (correct !== socket.correct) {
-                return socket.emit('mismatch')
+                return socket.emit('mismatch');
             }
 
-            // TODO: Create an attempt here
+            saveAttempt();
+        });
 
-            socket.emit('game-over');
-        })
+        var saveAttempt = () => {
+
+
+            let updates = {
+                No_of_Pipes_Passed__c: socket.score,
+                Total_Questions_Attempted__c: socket.attempted,
+                Attempt_Completed__c: true,
+                Answered_Correct__c: socket.correct
+            };
+
+            scoring.updateAttempt(socket.attemptID, updates, (err, resp) => {
+                if (err) {
+                    console.log(err);
+                    return socket.emit('mismatch');
+                }
+
+                socket.emit("game-over");
+            });
+        }
     });
 };

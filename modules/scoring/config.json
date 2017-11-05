@@ -7,7 +7,7 @@
     "attemptCompleteFlag" : "Attempt_Completed__c",
     "attemptCompleteValue" : true,
     "scoringKey" : "",
-    "attemptsObjName" : "Player_Attempt__c",
+    "attemptsObjName" : "LSHC_Player_Attempts__c",
     "isAttemptComplete" : {
         "key" : "Attempt_Completed__c",
         "objName" : "LSHC_Player_Attempts__c",
