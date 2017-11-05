@@ -11,7 +11,6 @@ const MODULES = {
 router.get('/', function (req, res, next) {
     MODULES.scores.getHighScorrer((err, winnerInfo) => {
 
-        // Getting error here currently, should change query later.
 
         var topScorrer = {
             name: "-",

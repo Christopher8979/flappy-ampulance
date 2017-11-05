@@ -20,6 +20,17 @@ module.exports = {
                 return callBack(err, null);
             }
 
+            if (!findResp.records.length) {
+                return callBack(null, {
+                    Player__r: {
+                        Name: "--",
+                        Email__c: "--"
+                    },
+                    Final_Score__c: "--",
+                    Service_Line__c: "--"
+                });
+            }
+
             const highScore = findResp.records[0].Final_Score__c;
 
             query = "Select " + obj.winnerDetails.join(", ") + " From " + obj.name + " where Game_ID__c = \'" + process.env.GAMEID + "\' and Attempt_Completed__c=true and Final_Score__c=" + highScore + " ORDER BY Hidden_Multiplier__c Desc limit 1 offset 0";
@@ -30,7 +41,9 @@ module.exports = {
                     return callBack(err, null);
                 }
 
-                return callBack(null, {
+                console.log(scorrerResp);
+
+                callBack(null, {
                     Player__r: {
                         Name: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Player_Name__c,
                         Email__c: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Email__c
