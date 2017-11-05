@@ -23,12 +23,9 @@ thisController = {
         service.fetchTopScorrers(NO_OF_PLAYERS, offset, OBJ_DETAILS, callBack);
     },
     getHighScorrer: (callBack) => {
-        const OBJ_DETAILS = {
-            name: config.objectID,
-            flag: config.attemptCompleteFlag
-        };
+        const OBJ_DETAILS = config.getWinner;
 
-        service.fetchTopScorrers(1, 0, OBJ_DETAILS, callBack);
+        service.getWinner(OBJ_DETAILS, callBack);
     },
     getPersonalBest: (id, callBack) => {
         const OBJ_DETAILS = config.personalBest;

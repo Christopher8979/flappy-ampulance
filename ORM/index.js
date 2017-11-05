@@ -3,6 +3,44 @@ const ASYNC = require('async');
 const GAMEID = process.env.GAMEID;
 
 module.exports = {
+    getWinner: (obj, callBack) => {
+        obj.clauses.Game_ID__c = process.env.GAMEID;
+
+        var query = "Select " + obj.details.join(", ") + " From " + obj.name + " where ";
+
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            query = query + " " + val + " = \'" + obj.clauses[val] + "\' and ";
+        });
+
+        query = query + "Attempt_Completed__c = true ORDER BY Final_Score__c Desc limit 1 offset 0";
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            const highScore = findResp.records[0].Final_Score__c;
+
+            query = "Select " + obj.winnerDetails.join(", ") + " From " + obj.name + " where Game_ID__c = \'" + process.env.GAMEID + "\' and Attempt_Completed__c=true and Final_Score__c=" + highScore + " ORDER BY Hidden_Multiplier__c Desc limit 1 offset 0";
+
+            FS.Query(query, function (err, scorrerResp) {
+
+                if (err) {
+                    return callBack(err, null);
+                }
+
+                return callBack(null, {
+                    Player__r: {
+                        Name: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Player_Name__c,
+                        Email__c: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Email__c
+                    },
+                    Final_Score__c: scorrerResp.records[0].Final_Score__c,
+                    Service_Line__c: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Service_Line__c
+                });
+            });
+        });
+    },
     getMetadata: function (object, callBack) {
         FS.Describe(object, function (err, metadata) {
             if (err) {
@@ -182,7 +220,7 @@ module.exports = {
             query = query + " " + val + " = " + obj.clauses[val] + " and ";
         });
 
-        query = query + " Player_ID__c = \'" + id.substring(0, id.length-3) + "\' and Game_ID__c =\'" + process.env.GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
+        query = query + " Player_ID__c = \'" + id.substring(0, id.length - 3) + "\' and Game_ID__c =\'" + process.env.GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
 
         FS.Query(query, function (err, data) {
             if (err) {

@@ -11,7 +11,7 @@ const MODULES = {
 router.get('/', function (req, res, next) {
     MODULES.scores.getHighScorrer((err, winnerInfo) => {
 
-        // Getting error her currently, should change query later.
+        // Getting error here currently, should change query later.
 
         var topScorrer = {
             name: "-",
@@ -175,10 +175,6 @@ router.get('/game-over/:id', (req, res) => {
         });
 
     });
-});
-
-router.post('/saveAttempt/:id', (req, res) => {
-
 });
 
 router.get('/contributors', (req, res) => {

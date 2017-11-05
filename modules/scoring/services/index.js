@@ -3,6 +3,9 @@ const UTILS = require('../../../utils.js');
 const ORM = require('../../../ORM');
 
 let thisService = {
+    getWinner: (objDetails, callBack) => {
+        ORM.getWinner(objDetails, callBack);
+    },
     fetchTopScorrers: (noOfPlayers, offset, obj, callBack) => {
         ORM.fetchTopPlayers(noOfPlayers, offset, obj, callBack);
     },
