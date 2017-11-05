@@ -92,6 +92,18 @@ module.exports = {
             }
         });
     },
+    fetchData: (id, obj, callBack) => {
+        var query = "Select id From " + obj.name + " where LSHC_Game__c = \'" + process.env.GAME_SFDC_ID + "\' AND LSHC_Players__c = \'" + id + "\'";
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            callBack(null, findResp.records[0].Id);
+        });
+    },
     fetchTopPlayers: (playerCount, offset, objDetails, callBack) => {
 
         return callBack(null, {
@@ -116,15 +128,18 @@ module.exports = {
     },
     completeIncompleteAttempts: (id, obj, callBack) => {
 
-        let getUncheckedRecordsQuery = "Select " + obj.details.join(", ");
+        obj.clauses.Player_ID__c = id;
+        obj.clauses.Game_ID__c = process.env.GAMEID;
+
+        let getUncheckedRecordsQuery = "Select " + obj.getThese.join(", ");
 
         getUncheckedRecordsQuery = getUncheckedRecordsQuery + " From " + obj.objName + " where ";
 
         Object.keys(obj.clauses).forEach((val, ind) => {
-            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = " + obj.clauses[val] + " and ";
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = \'" + obj.clauses[val] + "\' and ";
         });
 
-        getUncheckedRecordsQuery = getUncheckedRecordsQuery + obj.playerAPI + " = " + obj.value;
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + "Attempt_Completed__c = false";
 
         FS.Query(getUncheckedRecordsQuery, function (err, resp) {
             if (err) {
@@ -146,21 +161,7 @@ module.exports = {
                     return callBack(err, null);
                 }
 
-                let newAttemptDefaultData = {};
-
-                obj.defaltsForNewRecord.forEach((detail, index) => {
-                    newAttemptDefaultData[detail.key] = detail.value;
-                });
-
-                FS.create(obj.objName, newAttemptDefaultData, function (err, resp) {
-                    if (err) {
-                        console.info('Error wile saving attempt data in SFDC');
-                        console.info(err);
-                        callBack(err, null);
-                    }
-
-                    callBack(null, resp);
-                });
+                callBack(null, null);
             });
         });
     },

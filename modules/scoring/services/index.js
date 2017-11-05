@@ -23,9 +23,30 @@ let thisService = {
     },
     createAttempt: (id, data, objDetails, callBack) => {
         // before creating a new attempt check the isComplete flag.
-        objDetails.value = data.Player__c;
-        ORM.completeIncompleteAttempts(id, objDetails, () => {
+        ORM.completeIncompleteAttempts(id, objDetails, (err, resp) => {
+            if (err) {
+                console.log("Error which completing incomplete attempts");
+                console.log(err);
+                return callBack(err, null);
+            }
 
+            ORM.fetchData(id, { name: objDetails.junctionName }, (err, fetchResponse) => {
+                if (err) {
+                    console.log("Error while fetching junction id");
+                    console.log(err);
+                    return callBack(err, null);
+                }
+
+                let newAttemptDefaultData = {};
+
+                objDetails.defaltsForNewRecord.forEach((detail, index) => {
+                    newAttemptDefaultData[detail.key] = detail.value;
+                });
+
+                newAttemptDefaultData.Player_Attempts_Game__c = fetchResponse;
+
+                ORM.createRecord(objDetails.objName, newAttemptDefaultData, callBack);
+            });
         });
     },
     saveAttempt: (id, data, objName, callBack) => {

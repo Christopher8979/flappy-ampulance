@@ -100,7 +100,7 @@ router.get('/rules/:id', (req, res) => {
             console.log(err);
             return res.redirect('/');
         }
-        
+
         // Form data before sending it to rules page
         if (!data) {
             data = {
@@ -109,7 +109,7 @@ router.get('/rules/:id', (req, res) => {
                 Answered_Correct__c: 0
             }
         }
-        
+
         res.render('rules', {
             data: data,
             playerID: req.params.id
@@ -121,13 +121,13 @@ router.get('/play-game/:id', function (req, res) {
     if (!(req.params && req.params.id)) {
         return res.render('error', 'No params in rules page');
     }
+    var defaults = {};
 
-    MODULES.scores.checkCreatePlayerAttempt(req.params.id, (err, attemptID) => {
+    MODULES.scores.createAttempt(req.params.id, defaults, (err, attemptID) => {
         if (err) {
             console.log(err);
             return res.redirect("/");
         }
-
         res.render('game', {
             attemptID: attemptID
         });

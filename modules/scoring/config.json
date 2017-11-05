@@ -10,12 +10,11 @@
     "attemptsObjName" : "Player_Attempt__c",
     "isAttemptComplete" : {
         "key" : "Attempt_Completed__c",
-        "objName" : "Player_Attempt__c",
+        "objName" : "LSHC_Player_Attempts__c",
         "getThese" : ["id", "Attempt_Completed__c"],
         "clauses" : {
-            "Attempt_Completed__c" : false
         },
-        "playerAPI" : "player__c",
+        "junctionName" : "LSHC_Game_Played__c",
         "defaltsForNewRecord" : [
             {
                 "key" : "Answered_Correct__c",

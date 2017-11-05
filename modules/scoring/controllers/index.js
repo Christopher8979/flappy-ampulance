@@ -39,7 +39,7 @@ thisController = {
         const OBJ_DETAILS = config.playerLinkCheck;
         let DEFAULT_ATTEMPT_DATA = config.defaultAttempt;
 
-        service.checkPlayerLink(id, OBJ_DETAILS, (err, linkPresent, linkID) => {
+        service.getIncompleteAttempts(id, OBJ_DETAILS, (err, linkPresent, linkID) => {
             if (err) {
                 console.log("error while checking for games played record");
                 return callBack(err, null);
@@ -118,7 +118,6 @@ thisController = {
             }
         });
     },
-
     getPlayerDetails: (id, callBack) => {
         const OBJ_DETAILS = config.details;
         service.getPlayerDetails(id, OBJ_DETAILS, callBack);
