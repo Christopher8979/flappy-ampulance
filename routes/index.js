@@ -72,8 +72,17 @@ router.post('/checkUser', (req, res) => {
             });
         }
 
-        res.status(200).jsonp({
-            id: data
+        MODULES.scores.createPlayerJunction({ LSHC_Game__c: process.env.GAME_SFDC_ID, LSHC_Players__c: data }, (err, junctionResp) => {
+            if (err) {
+                return res.status(400).jsonp({
+                    'status': 'Some error while validating details provided',
+                    'error': err
+                });
+            }
+
+            res.status(200).jsonp({
+                id: data
+            });
         });
     });
 
@@ -85,9 +94,9 @@ router.get('/rules/:id', (req, res) => {
         return res.redirect('/');
     }
 
-    MODULES.scores.getLatestAttempts(req.params.id, (err, attempts) => {
+    MODULES.scores.getLatestAttempts(req.params.id, (err, data) => {
         if (err) {
-            console.info('Error while getting attempts');
+            console.info('Error while getting personal best');
             console.log(err);
             return res.redirect('/');
         }
@@ -95,7 +104,7 @@ router.get('/rules/:id', (req, res) => {
         // Form data before sending it to rules page
 
         res.render('rules', {
-            attempts: JSON.stringify(attempts),
+            attempts: JSON.stringify(data),
             playerID: req.params.id
         });
     });

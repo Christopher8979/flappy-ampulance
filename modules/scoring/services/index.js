@@ -46,6 +46,18 @@ let thisService = {
             }
         });
     },
+    checkJunction: (data, objDetails, callBack) => {
+        ORM.checkForCompleteRecords(objDetails.name, data, (err, isPresent, ID) => {
+            if (err) {
+                return callBack(err, null);
+            }
+            if (isPresent) {
+                callBack(null, isPresent, ID);
+            } else {
+                callBack(null, isPresent);
+            }
+        });
+    },
     createPlayer: (objName, data, callBack) => {
         ORM.createRecord(objName, data, (err, createResp) => {
             if (err) {

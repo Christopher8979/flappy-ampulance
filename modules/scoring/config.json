@@ -53,5 +53,10 @@
     "playerLinkCheck": {
         "name" : "LSHC_Game_Played__c",
         "key" : "LSHC_Players__c"
-    }
+    },
+    "personalBest": {
+        "object": "",
+        "details": []
+    },
+    "attemptsLink": "LSHC_Game_Played__c"
 }

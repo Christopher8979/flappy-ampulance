@@ -61,6 +61,28 @@ module.exports = {
             }
         });
     },
+    checkForCompleteRecords: (object, data, callBack) => {
+        var query = "Select id from " + object + " where ";
+
+        Object.keys(data).forEach((key, index) => {
+            query += key + " = \'" + data[key] + "\' AND ";
+        });
+
+        query = query.substring(0, query.length - " AND ".length);
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (findResp.totalSize) {
+                callBack(null, true, findResp.records[0].Id);
+            } else {
+                callBack(null, false);
+            }
+        });
+    },
     createRecord: (object, data, callBack) => {
         FS.create(object, data, function (err, createResp) {
             if (err) {
@@ -180,9 +202,9 @@ module.exports = {
             return callBack(null, data.records);
         });
     },
-    fetchBestScore : (id, obj, callBack) => {
+    fetchBestScore: (id, obj, callBack) => {
         var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where id = \'" + id + "\' AND ORDER BY Final_Score__c DESC limit 1";
-        
+
         FS.Query(query, function (err, data) {
             if (err) {
                 console.info('error while getting questions from SFDC');

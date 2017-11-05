@@ -98,6 +98,27 @@ thisController = {
             }
         });
     },
+    createPlayerJunction: (info, callBack) => {
+        const OBJ_DETAILS = {
+            name: config.attemptsLink
+        };
+
+        // Check if junction is present and then create if present
+        service.checkJunction(info, OBJ_DETAILS, (err, junctionPresent, junctionID) => {
+            if (err) {
+                console.log('Error while creating junction');
+                console.log(err);
+                return callBack(err, null);
+            }
+
+            if (junctionPresent) {
+                callBack(null, junctionID);
+            } else {
+                service.createPlayer(OBJ_DETAILS.name, info, callBack);
+            }
+        });
+    },
+
     getPlayerDetails: (id, callBack) => {
         const OBJ_DETAILS = config.details;
         service.getPlayerDetails(id, OBJ_DETAILS, callBack);
