@@ -182,7 +182,7 @@ module.exports = {
             query = query + " " + val + " = " + obj.clauses[val] + " and ";
         });
 
-        query = query + " Player_ID__c = \'" + id + "\' and Game_ID__c =\'" + GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
+        query = query + " Player_ID__c = \'" + id.substring(0, id.length-3) + "\' and Game_ID__c =\'" + process.env.GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
 
         FS.Query(query, function (err, data) {
             if (err) {

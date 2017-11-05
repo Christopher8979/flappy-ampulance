@@ -31,7 +31,7 @@
         ]
     },
     "lastAttemptDetails" : {
-        "details" : ["No_of_Pipes_Passed__c", "Answered_Correct__c", "Attempt_Completed__c", "Final_Score__c", "Game_Name__c", "Id", "Name", "Player_Attempts_Game__c", "Player_Name__c", "Total_Questions_Attempted__c", "Hidden_Multiplier__c"],
+        "details" : ["Answered_Correct__c", "Final_Score__c", "Hidden_Multiplier__c", "No_of_Pipes_Passed__c", "Total_Questions_Attempted__c", "Id"],
         "offset" : 0,
         "from" : "LSHC_Player_Attempts__c",
         "clauses" : {
