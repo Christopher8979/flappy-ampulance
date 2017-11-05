@@ -94,17 +94,24 @@ router.get('/rules/:id', (req, res) => {
         return res.redirect('/');
     }
 
-    MODULES.scores.getLatestAttempts(req.params.id, (err, data) => {
+    MODULES.scores.getPersonalBest(req.params.id, (err, data) => {
         if (err) {
             console.info('Error while getting personal best');
             console.log(err);
             return res.redirect('/');
         }
-
+        
         // Form data before sending it to rules page
-
+        if (!data) {
+            data = {
+                Final_Score__c: 0,
+                No_of_Pipes_Passed__c: 0,
+                Answered_Correct__c: 0
+            }
+        }
+        
         res.render('rules', {
-            attempts: JSON.stringify(data),
+            data: data,
             playerID: req.params.id
         });
     });

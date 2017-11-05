@@ -55,8 +55,8 @@
         "key" : "LSHC_Players__c"
     },
     "personalBest": {
-        "object": "",
-        "details": []
+        "object": "LSHC_Player_Attempts__c",
+        "details": ["ID", "Answered_Correct__c", "Final_Score__c", "Hidden_Multiplier__c", "No_of_Pipes_Passed__c", "Total_Questions_Attempted__c"]
     },
     "attemptsLink": "LSHC_Game_Played__c"
 }

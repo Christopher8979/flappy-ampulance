@@ -203,7 +203,7 @@ module.exports = {
         });
     },
     fetchBestScore: (id, obj, callBack) => {
-        var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where id = \'" + id + "\' AND ORDER BY Final_Score__c DESC limit 1";
+        var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where Player_ID__c = \'" + id + "\' AND Game_ID__c = \'" + process.env.GAMEID + "\' AND Attempt_Completed__c=TRUE ORDER BY Final_Score__c DESC limit 1";
 
         FS.Query(query, function (err, data) {
             if (err) {
@@ -211,7 +211,7 @@ module.exports = {
                 return callBack(err, null);
             }
 
-            return callBack(null, data.records);
+            return callBack(null, data.records[0]);
         });
     }
 };
