@@ -1,16 +1,30 @@
-Rules to be visible here
-<br>
-<br>
-<br>
-<br>
-<br>
-<strong>
-data(sending string while rendering change to object) : ->
-</strong>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div class="container main">
+    <div class="rules-container">
+        <div class="best">
+            <div class="card default-z holder">
+                <h2 class="">PERSONAL BEST</h2>
+                <h1 class="text-yellow">{{data.Final_Score__c}}</h1>
+                <span class="detail">PIPES PASSED : {{data.No_of_Pipes_Passed__c}}</span>
+                <span class="detail">QUESTIONS ANSWERED : {{data.Answered_Correct__c}}</span>
+            </div>
+        </div>
+        <div class="rules-holder">
+            <div class="card default-z holder">
+                <h2>INSTRUCTIONS</h2>
+                <div class="inst">
+                    <span>Hit space or click on screen to avoid helicoptor from falling</span>
+                    <span>Navigate through as many pipes as possible to score highest points</span>
+                    <span>To make it simpler, helicoptor will not crash/stop unless it takes huge damage</span>
+                    <span>Once you crash, a set of questions will pop up based on the pipes you have passed answer all of them correct to score high</span>
+                    <span>You might get maximum of 20 questions</span>
+                    <span>There is a secret multiplier that multiplies your score based on your performances in previous attempts all together</span>
+                </div>
 
-{{attempts}}
+                <div class="action">
+                    <a href="/play-game/{{playerID}}" class="text-green">PLAY >></a>    
+                </div>                
+                
+            </div>
+        </div>
+    </div>
+</div>

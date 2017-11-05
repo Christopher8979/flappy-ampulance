@@ -11,7 +11,7 @@
         showNextQuestion: function () {
             if (questions.length > index) {
                 var question = questions[index];
-                
+
                 $("#question-box .question").text(question.Question__c);
                 $("#question-box #a__c").val(question.a__c).next().text(question.a__c);
                 $("#question-box #b__c").val(question.b__c).next().text(question.b__c);
@@ -33,11 +33,12 @@
 
             if ($selectedOption.length) {
                 socket.emit("checkAnswer", {
-                    id: questions[index-1].Id,
-                    answer: $selectedOption.val()
-                })
+                    id: questions[index - 1].Id,
+                    answer: $selectedOption.val(),
+                    attempt: $("#game-holder").data("id")
+                });
             } else {
-                toast("Select an option")
+                toast("Select an option");
             }
         },
 
@@ -47,7 +48,7 @@
                 $("#question-box .correct").text(++correct)
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 self.showNextQuestion();
             }, 500);
         }

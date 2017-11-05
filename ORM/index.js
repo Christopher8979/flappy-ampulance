@@ -3,6 +3,57 @@ const ASYNC = require('async');
 const GAMEID = process.env.GAMEID;
 
 module.exports = {
+    getWinner: (obj, callBack) => {
+        obj.clauses.Game_ID__c = process.env.GAMEID;
+
+        var query = "Select " + obj.details.join(", ") + " From " + obj.name + " where ";
+
+        Object.keys(obj.clauses).forEach((val, ind) => {
+            query = query + " " + val + " = \'" + obj.clauses[val] + "\' and ";
+        });
+
+        query = query + "Attempt_Completed__c = true ORDER BY Final_Score__c Desc limit 1 offset 0";
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (!findResp.records.length) {
+                return callBack(null, {
+                    Player__r: {
+                        Name: "--",
+                        Email__c: "--"
+                    },
+                    Final_Score__c: "--",
+                    Service_Line__c: "--"
+                });
+            }
+
+            const highScore = findResp.records[0].Final_Score__c;
+
+            query = "Select " + obj.winnerDetails.join(", ") + " From " + obj.name + " where Game_ID__c = \'" + process.env.GAMEID + "\' and Attempt_Completed__c=true and Final_Score__c=" + highScore + " ORDER BY Hidden_Multiplier__c Desc limit 1 offset 0";
+
+            FS.Query(query, function (err, scorrerResp) {
+
+                if (err) {
+                    return callBack(err, null);
+                }
+
+                console.log(scorrerResp);
+
+                callBack(null, {
+                    Player__r: {
+                        Name: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Player_Name__c,
+                        Email__c: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Email__c
+                    },
+                    Final_Score__c: scorrerResp.records[0].Final_Score__c,
+                    Service_Line__c: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Service_Line__c
+                });
+            });
+        });
+    },
     getMetadata: function (object, callBack) {
         FS.Describe(object, function (err, metadata) {
             if (err) {
@@ -61,6 +112,28 @@ module.exports = {
             }
         });
     },
+    checkForCompleteRecords: (object, data, callBack) => {
+        var query = "Select id from " + object + " where ";
+
+        Object.keys(data).forEach((key, index) => {
+            query += key + " = \'" + data[key] + "\' AND ";
+        });
+
+        query = query.substring(0, query.length - " AND ".length);
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            if (findResp.totalSize) {
+                callBack(null, true, findResp.records[0].Id);
+            } else {
+                callBack(null, false);
+            }
+        });
+    },
     createRecord: (object, data, callBack) => {
         FS.create(object, data, function (err, createResp) {
             if (err) {
@@ -70,6 +143,18 @@ module.exports = {
             }
         });
     },
+    fetchData: (id, obj, callBack) => {
+        var query = "Select id From " + obj.name + " where LSHC_Game__c = \'" + process.env.GAME_SFDC_ID + "\' AND LSHC_Players__c = \'" + id + "\'";
+
+        FS.Query(query, function (err, findResp) {
+
+            if (err) {
+                return callBack(err, null);
+            }
+
+            callBack(null, findResp.records[0].Id);
+        });
+    },
     fetchTopPlayers: (playerCount, offset, objDetails, callBack) => {
 
         return callBack(null, {
@@ -77,7 +162,8 @@ module.exports = {
                 Name: "Ashwin P Chandran",
                 Email__c: "ashchandran@deloitte.com"
             },
-            Final_Score__c: "2314"
+            Final_Score__c: "2314",
+            Service_Line__c: "DD"
         });
 
         var query = "SELECT * FROM " + objDetails.name + " where " + objDetails.flag + " = " + objDetails.value + " AND ORDER BY CreatedDate DESC limit " + playerCount + " OFFSET " + offset;
@@ -93,15 +179,18 @@ module.exports = {
     },
     completeIncompleteAttempts: (id, obj, callBack) => {
 
-        let getUncheckedRecordsQuery = "Select " + obj.details.join(", ");
+        obj.clauses.Player_ID__c = id;
+        obj.clauses.Game_ID__c = process.env.GAMEID;
+
+        let getUncheckedRecordsQuery = "Select " + obj.getThese.join(", ");
 
         getUncheckedRecordsQuery = getUncheckedRecordsQuery + " From " + obj.objName + " where ";
 
         Object.keys(obj.clauses).forEach((val, ind) => {
-            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = " + obj.clauses[val] + " and ";
+            getUncheckedRecordsQuery = getUncheckedRecordsQuery + " " + val + " = \'" + obj.clauses[val] + "\' and ";
         });
 
-        getUncheckedRecordsQuery = getUncheckedRecordsQuery + obj.playerAPI + " = " + obj.value;
+        getUncheckedRecordsQuery = getUncheckedRecordsQuery + "Attempt_Completed__c = false";
 
         FS.Query(getUncheckedRecordsQuery, function (err, resp) {
             if (err) {
@@ -123,21 +212,7 @@ module.exports = {
                     return callBack(err, null);
                 }
 
-                let newAttemptDefaultData = {};
-
-                obj.defaltsForNewRecord.forEach((detail, index) => {
-                    newAttemptDefaultData[detail.key] = detail.value;
-                });
-
-                FS.create(obj.objName, newAttemptDefaultData, function (err, resp) {
-                    if (err) {
-                        console.info('Error wile saving attempt data in SFDC');
-                        console.info(err);
-                        callBack(err, null);
-                    }
-
-                    callBack(null, resp);
-                });
+                callBack(null, null);
             });
         });
     },
@@ -158,7 +233,7 @@ module.exports = {
             query = query + " " + val + " = " + obj.clauses[val] + " and ";
         });
 
-        query = query + " Player_ID__c = \'" + id + "\' and Game_ID__c =\'" + GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
+        query = query + " Player_ID__c = \'" + id.substring(0, id.length - 3) + "\' and Game_ID__c =\'" + process.env.GAMEID + "\' ORDER BY CreatedDate DESC NULLS LAST limit " + noOfAttempts + " OFFSET " + obj.offset;
 
         FS.Query(query, function (err, data) {
             if (err) {
@@ -177,6 +252,18 @@ module.exports = {
             }
 
             return callBack(null, data.records);
+        });
+    },
+    fetchBestScore: (id, obj, callBack) => {
+        var query = "Select " + obj.details.join(", ") + " from " + obj.object + " where Player_ID__c = \'" + id + "\' AND Game_ID__c = \'" + process.env.GAMEID + "\' AND Attempt_Completed__c=TRUE ORDER BY Final_Score__c DESC limit 1";
+
+        FS.Query(query, function (err, data) {
+            if (err) {
+                console.info('error while getting questions from SFDC');
+                return callBack(err, null);
+            }
+
+            return callBack(null, data.records[0]);
         });
     }
 };

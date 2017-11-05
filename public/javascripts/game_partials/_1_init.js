@@ -139,9 +139,8 @@ $(document).on("initialize-socket", function () {
     socket = io();
 
     socket.on('fetchedQuestions', function (questions) {
-        console.log(questions);
-        quiz.loadQuestions(questions)
-        quiz.showNextQuestion()
+        quiz.loadQuestions(questions);
+        quiz.showNextQuestion();
     });
 
     socket.on("mismatch", function () {
@@ -154,8 +153,7 @@ $(document).on("initialize-socket", function () {
     })
 
     socket.on("answer", function (data) {
-        console.log(data);
-        quiz.checkedAnswer(data)
+        quiz.checkedAnswer(data);
     })
 
     socket.on("game-over", function () {

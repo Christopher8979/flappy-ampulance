@@ -67,7 +67,7 @@ body {
   color: green; }
 
 .text-yellow {
-  color: yellow; }
+  color: #e8c500; }
 
 .text-ash {
   color: #666666; }
@@ -495,6 +495,51 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 .error.fill-all .fill-all {
   display: block; }
 
+.flex-center, .rules-container, .rules-container .best, .rules-container .best .holder, .rules-container .rules-holder, .rules-container .rules-holder .holder, .rules-container .rules-holder .holder .inst, .rules-container .rules-holder .holder .action, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.rules-container {
+  flex-grow: 10; }
+  .rules-container .best {
+    flex-grow: 5; }
+    .rules-container .best .holder {
+      padding: 1rem 3rem 3rem 3rem;
+      flex-direction: column;
+      color: #2c2c29; }
+      .rules-container .best .holder h1 {
+        font-size: 4rem;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 1rem; }
+  .rules-container .rules-holder {
+    flex-grow: 5;
+    max-width: 50%; }
+    .rules-container .rules-holder .holder {
+      padding: 1rem 3rem 3rem 3rem;
+      flex-direction: column;
+      max-width: 60%;
+      color: #2c2c29; }
+      .rules-container .rules-holder .holder .inst {
+        flex-direction: column;
+        align-items: flex-start !important; }
+        .rules-container .rules-holder .holder .inst span {
+          padding-bottom: 0.7rem; }
+          .rules-container .rules-holder .holder .inst span:before {
+            content: "- "; }
+      .rules-container .rules-holder .holder .action {
+        width: 100%;
+        justify-content: flex-end !important; }
+        .rules-container .rules-holder .holder .action a {
+          text-decoration: none; }
+          .rules-container .rules-holder .holder .action a:hover {
+            text-decoration: none; }
+          .rules-container .rules-holder .holder .action a:active {
+            text-decoration: none; }
+          .rules-container .rules-holder .holder .action a:visited {
+            text-decoration: none; }
+
 #game-holder {
   width: 90%;
   max-width: 600px;
@@ -505,7 +550,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
   border-radius: 5px; }
 
-.flex-center, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
+.flex-center, .rules-container, .rules-container .best, .rules-container .best .holder, .rules-container .rules-holder, .rules-container .rules-holder .holder, .rules-container .rules-holder .holder .inst, .rules-container .rules-holder .holder .action, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div, .game-end .holder .card .summary .score-details, .game-end .holder .card .summary .score-details > span {
   display: flex;
   align-items: center;
   justify-content: center; }
