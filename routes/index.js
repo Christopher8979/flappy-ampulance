@@ -128,7 +128,8 @@ router.get('/play-game/:id', function (req, res) {
             return res.redirect("/");
         }
         res.render('game', {
-            attemptID: attemptID
+            attemptID: attemptID,
+            id: req.params.id
         });
     });
 

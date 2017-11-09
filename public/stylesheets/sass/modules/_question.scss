@@ -1,4 +1,4 @@
-.question-box {
+.question-box, .confirmation {
     width: 80%;
     max-width: 400px;
     z-index: 1000;
@@ -63,6 +63,19 @@
 }
 
 .question-frame {
+
+    .confirmation {
+        display: none;
+
+        .action {
+            width: 30%;
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+        }
+    }
+
     .backdrop, .question-box {
         display: none;
     }
@@ -70,6 +83,18 @@
     &.show {
         .backdrop, .question-box {
             display: block;
+        }
+    }
+
+    &.no-score {
+        #question-box {
+            display: none;
+        }
+        .confirmation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
         }
     }
 }

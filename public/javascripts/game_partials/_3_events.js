@@ -40,9 +40,13 @@ function playerJump() {
 function playerDead() {
     currentstate = states.ScoreScreen;
     createjs.Ticker.off("tick", gameTicker);
-    socket.emit("crash", {
-        pipesPassed: score
-    });
+    if (score) {
+        socket.emit("crash", {
+            pipesPassed: score
+        });
+    } else {
+        $(".question-frame").addClass("no-score show");
+    }    
 }
 
 function updateScore() {

@@ -348,7 +348,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     width: 0;
     background: transparent; } }
 
-.question-box {
+.question-box, .confirmation {
   width: 80%;
   max-width: 400px;
   z-index: 1000;
@@ -358,7 +358,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   opacity: 0;
   padding: 35px;
   animation: slide-in 1s 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
-  .question-box .tally {
+  .question-box .tally, .confirmation .tally {
     position: absolute;
     top: 0;
     right: 0;
@@ -367,18 +367,18 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     background: #000000;
     padding: 8px 25px;
     border-radius: 0 4px; }
-  .question-box .options {
+  .question-box .options, .confirmation .options {
     margin: 20px 0; }
-  .question-box .option {
+  .question-box .option, .confirmation .option {
     padding: 5px 0; }
-    .question-box .option input {
+    .question-box .option input, .confirmation .option input {
       display: initial;
       width: auto; }
-    .question-box .option.hide {
+    .question-box .option.hide, .confirmation .option.hide {
       display: none; }
-  .question-box .action {
+  .question-box .action, .confirmation .action {
     text-align: right; }
-    .question-box .action button {
+    .question-box .action button, .confirmation .action button {
       background: transparent;
       border: none;
       text-transform: uppercase;
@@ -396,11 +396,29 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   height: 100%;
   animation: fade-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
 
+.question-frame .confirmation {
+  display: none; }
+  .question-frame .confirmation .action {
+    width: 30%;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding-top: 1rem; }
+
 .question-frame .backdrop, .question-frame .question-box {
   display: none; }
 
 .question-frame.show .backdrop, .question-frame.show .question-box {
   display: block; }
+
+.question-frame.no-score #question-box {
+  display: none; }
+
+.question-frame.no-score .confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%; }
 
 @keyframes slide-in {
   0% {
