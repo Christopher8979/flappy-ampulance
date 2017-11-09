@@ -1,4 +1,4 @@
-.question-box {
+.question-box, .confirmation {
     width: 80%;
     max-width: 400px;
     z-index: 1000;
@@ -6,7 +6,7 @@
     top: 50%;
     left: 50%;
     opacity: 0;
-    padding: 30px;
+    padding: 35px;
     animation: slide-in 1s 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 
     .tally {
@@ -30,6 +30,10 @@
         input {
             display: initial;
             width: auto;
+        }
+
+        &.hide {
+            display: none;
         }
     }
 
@@ -59,6 +63,19 @@
 }
 
 .question-frame {
+
+    .confirmation {
+        display: none;
+
+        .action {
+            width: 30%;
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+        }
+    }
+
     .backdrop, .question-box {
         display: none;
     }
@@ -66,6 +83,18 @@
     &.show {
         .backdrop, .question-box {
             display: block;
+        }
+    }
+
+    &.no-score {
+        #question-box {
+            display: none;
+        }
+        .confirmation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
         }
     }
 }

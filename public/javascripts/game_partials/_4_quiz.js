@@ -12,11 +12,20 @@
             if (questions.length > index) {
                 var question = questions[index];
 
+                $("#question-box .option").addClass("hide");
                 $("#question-box .question").text(question.Question__c);
-                $("#question-box #a__c").val(question.a__c).next().text(question.a__c);
-                $("#question-box #b__c").val(question.b__c).next().text(question.b__c);
-                $("#question-box #c__c").val(question.c__c).next().text(question.c__c);
-                $("#question-box #d__c").val(question.d__c).next().text(question.d__c);
+                if (question.a__c) {
+                    $("#question-box #a__c").parent().parent().removeClass("hide").find("#a__c").val(question.a__c).next().text(question.a__c);
+                }
+                if (question.b__c) {
+                    $("#question-box #b__c").parent().parent().removeClass("hide").find("#b__c").val(question.b__c).next().text(question.b__c);
+                }
+                if (question.c__c) {
+                    $("#question-box #c__c").parent().parent().removeClass("hide").find("#c__c").val(question.c__c).next().text(question.c__c);
+                }
+                if (question.d__c) {
+                    $("#question-box #d__c").parent().parent().removeClass("hide").find("#d__c").val(question.d__c).next().text(question.d__c);
+                }
                 $("#question-box input[type=radio]:checked").prop('checked', false);
                 index++;
 

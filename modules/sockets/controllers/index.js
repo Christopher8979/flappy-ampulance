@@ -41,8 +41,6 @@ module.exports = (io) => {
             // If yes, clear that session and then create new session
             // Sample/Default session - session[id] = {time: <<timestamp>>, pipespassed: 0}
 
-            console.log("Started game");
-            console.log(attemptID);
         });
 
         socket.on('cross', (currentStatus) => {

@@ -128,7 +128,8 @@ router.get('/play-game/:id', function (req, res) {
             return res.redirect("/");
         }
         res.render('game', {
-            attemptID: attemptID
+            attemptID: attemptID,
+            id: req.params.id
         });
     });
 
@@ -164,11 +165,12 @@ router.get('/game-over/:id', (req, res) => {
                     serviceLine: winnerInfo.Service_Line__c
                 };
 
-
                 res.render('game-over', {
                     lastAttempts: attemptData[0],
                     topScorrer: topScorrer,
-                    player: playerInfo[0]
+                    player: playerInfo[0],
+                    id: req.params.id,
+                    isTopScorrer : topScorrer.score === attemptData[0].Final_Score__c
                 });
             });
         });
