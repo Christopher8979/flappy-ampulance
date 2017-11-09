@@ -4,7 +4,9 @@
             <div class="card clearfix">
                 <div class="history">
                     <div class="latest-score">
-                        <img src="../images/cup.png" alt="">
+                        {{#if isTopScorrer}}
+                        <img src="../images/crown.png" alt=""> {{else}}
+                        <img src="../images/cup.png" alt=""> {{/if}}
                         <h1 class="text-white">{{lastAttempts.Final_Score__c}}</h1>
                         <span class="text-white">{{player.Player_Name__c}}</span>
                         <span class="text-green">{{player.Email__c}}</span>

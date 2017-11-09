@@ -165,12 +165,12 @@ router.get('/game-over/:id', (req, res) => {
                     serviceLine: winnerInfo.Service_Line__c
                 };
 
-
                 res.render('game-over', {
                     lastAttempts: attemptData[0],
                     topScorrer: topScorrer,
                     player: playerInfo[0],
-                    id: req.params.id
+                    id: req.params.id,
+                    isTopScorrer : topScorrer.score === attemptData[0].Final_Score__c
                 });
             });
         });
