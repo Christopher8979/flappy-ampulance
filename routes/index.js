@@ -93,7 +93,7 @@ router.get('/rules/:id', (req, res) => {
         return res.redirect('/');
     }
 
-    MODULES.scores.getPersonalBest(req.params.id.substring(0, req.params.id.length - 3), (err, data) => {
+    MODULES.scores.getPersonalBest(req.params.id, (err, data) => {
         if (err) {
             console.info('Error while getting personal best');
             console.log(err);

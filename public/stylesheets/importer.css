@@ -531,9 +531,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
       color: #2c2c29; }
       .rules-container .rules-holder .holder .inst {
         flex-direction: column;
-        align-items: flex-start !important; }
+        align-items: flex-start !important;
+        width: 100%; }
         .rules-container .rules-holder .holder .inst span {
-          padding-bottom: 0.7rem; }
+          padding-bottom: 0.7rem;
+          display: block;
+          width: 100%; }
           .rules-container .rules-holder .holder .inst span:before {
             content: "- "; }
       .rules-container .rules-holder .holder .action {
@@ -610,7 +613,8 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
           font-size: 2.5rem; }
         .game-end .holder .card .summary .score-details {
           flex-direction: column;
-          align-items: stretch; }
+          align-items: stretch;
+          width: 50%; }
           .game-end .holder .card .summary .score-details > span {
             justify-content: space-between;
             font-size: 1.25rem; }
@@ -618,3 +622,5 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
           width: 60%;
           display: flex;
           justify-content: space-around; }
+          .game-end .holder .card .summary .actions a {
+            text-decoration: none; }
