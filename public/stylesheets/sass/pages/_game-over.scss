@@ -93,6 +93,12 @@
                         font-size: 1.25rem;                        
                     }
                 }
+
+                .actions{
+                    width: 60%;
+                    display: flex;
+                    justify-content: space-around;
+                }
             }
         }        
     }

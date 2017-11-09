@@ -40,28 +40,14 @@
                             <span>{{lastAttempts.Hidden_Multiplier__c}}</span>
                         </span>
                     </div>
-                    <h1>TOTAL SCORE - {{lastAttempts.Final_Score__c}}</h1>
+                    <h1>TOTAL SCORE : {{lastAttempts.Final_Score__c}}</h1>
+
+                    <div class="actions">
+                        <a href="/rules/{{id}}" class="upper-case text-green">Try Again</a>
+                        <a href="/" class="upper-case text-red">Quit</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{{!-- <strong>LAST ATTEMPT Details (sending string while rendering change to object)</strong>
-<br>
-<br> {{lastAttempts}}
-
-<br>
-<br>
-<br>
-<strong>This player Info (sending string while rendering change to object)</strong>
-<br>
-<br> {{player}}
-
-<br>
-<br>
-<br>
-<br>
-<strong>Winner Info (sending string while rendering change to object)</strong>
-<br>
-<br> {{topScorrer}} --}}

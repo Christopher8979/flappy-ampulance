@@ -72,6 +72,12 @@ body {
 .text-ash {
   color: #666666; }
 
+.text-red {
+  color: #e62828; }
+
+.text-orange {
+  color: #dc8c52; }
+
 .upper-case {
   text-transform: uppercase; }
 
@@ -350,7 +356,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   top: 50%;
   left: 50%;
   opacity: 0;
-  padding: 30px;
+  padding: 35px;
   animation: slide-in 1s 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
   .question-box .tally {
     position: absolute;
@@ -368,6 +374,8 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     .question-box .option input {
       display: initial;
       width: auto; }
+    .question-box .option.hide {
+      display: none; }
   .question-box .action {
     text-align: right; }
     .question-box .action button {
@@ -606,3 +614,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
           .game-end .holder .card .summary .score-details > span {
             justify-content: space-between;
             font-size: 1.25rem; }
+        .game-end .holder .card .summary .actions {
+          width: 60%;
+          display: flex;
+          justify-content: space-around; }

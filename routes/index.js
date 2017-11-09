@@ -93,7 +93,7 @@ router.get('/rules/:id', (req, res) => {
         return res.redirect('/');
     }
 
-    MODULES.scores.getPersonalBest(req.params.id, (err, data) => {
+    MODULES.scores.getPersonalBest(req.params.id.substring(0, req.params.id.length - 3), (err, data) => {
         if (err) {
             console.info('Error while getting personal best');
             console.log(err);
@@ -168,7 +168,8 @@ router.get('/game-over/:id', (req, res) => {
                 res.render('game-over', {
                     lastAttempts: attemptData[0],
                     topScorrer: topScorrer,
-                    player: playerInfo[0]
+                    player: playerInfo[0],
+                    id: req.params.id
                 });
             });
         });
