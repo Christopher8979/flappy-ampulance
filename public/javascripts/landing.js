@@ -52,7 +52,7 @@ $(document).on("initialize-entry", function () {
                 $(".error").removeClass("service name email fill-all");
             }
         } else {
-            $(".error").removeClass("service name fill-all").addClass("email");
+            $(".error").removeClass("service name fill-all email");
         }
     });
 

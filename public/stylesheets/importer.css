@@ -194,7 +194,7 @@ body {
   top: 0;
   left: 0;
   background-color: #fff;
-  margin: 0;
+  margin-top: 0;
   max-height: 650px;
   z-index: 999;
   width: 100%;
@@ -596,7 +596,7 @@ body {
           display: block;
           width: 100%; }
           .rules-container .rules-holder .holder .inst span:before {
-            content: "- "; }
+            content: "\2022  "; }
       .rules-container .rules-holder .holder .action {
         width: 100%;
         justify-content: flex-end !important; }
@@ -651,7 +651,10 @@ body {
             margin: 0.1rem 0;
             margin-top: 1rem; }
         .game-end .holder .card .history .high-scorrer {
-          flex-grow: 4; }
+          flex-grow: 4;
+          flex-direction: column; }
+          .game-end .holder .card .history .high-scorrer > h3 {
+            margin: 0rem 0 1rem 0; }
           .game-end .holder .card .history .high-scorrer .content {
             width: 80%;
             align-items: flex-end; }
