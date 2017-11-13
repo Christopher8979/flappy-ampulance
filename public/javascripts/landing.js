@@ -28,7 +28,7 @@ $(document).on("initialize-entry", function () {
                     location.href = "/rules/" + data.id;
                 },
                 error: function (err) {
-                    // location.href = '/';
+                    location.href = '/';
                     console.log(err);
                 }
             });

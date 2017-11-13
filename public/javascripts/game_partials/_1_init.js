@@ -140,7 +140,6 @@ $(document).on("initialize-socket", function () {
     socket = io();
 
     socket.on('fetchedQuestions', function (questions) {
-        console.log(questions);
         quiz.loadQuestions(questions);
         quiz.showNextQuestion();
     });
