@@ -45,6 +45,7 @@
                     h1 {
                         margin: 0.1rem 0;
                         margin-top: 1rem;
+                        font-size: 5rem;
                     }
 
                 }
@@ -82,21 +83,28 @@
             .summary {
                 flex-grow: 5.5;
                 flex-direction: column;
-                
-                h1 {
+
+                .title {
+                    margin-bottom: 50px;
                     font-size: 2.5rem;
                 }
                 
-                .score-details {
-                    @extend .flex-center;
-                    flex-direction: column;
-                    align-items: stretch;
-                    width: 50%;
+                .total {
+                    font-size: 5rem;
+                    font-weight: bold;
 
-                    & > span {
-                        @extend .flex-center;
-                        justify-content: space-between;
-                        font-size: 1.25rem;                        
+                    td:nth-child(1) {
+                        color: grey;
+                    }
+                }
+                
+                .score-details {
+                    margin: 0 50px;
+                    margin-bottom: 50px;
+
+                    td:nth-child(1) {
+                        text-align: right;
+                        padding-right: 50px;
                     }
                 }
 
@@ -104,6 +112,7 @@
                     width: 60%;
                     display: flex;
                     justify-content: space-around;
+                    font-weight: bold;
 
                     a {
                         text-decoration: none;
