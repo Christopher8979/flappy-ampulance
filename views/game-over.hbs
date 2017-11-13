@@ -24,26 +24,29 @@
                     </div>
                 </div>
                 <div class="summary">
-                    <h1>SCORECARD</h1>
-                    <div class="score-details">
-                        <span>
-                            <span>Pipes Passed &nbsp;</span>
-                            <span>{{lastAttempts.No_of_Pipes_Passed__c}}</span>
-                        </span>
-                        <span>
-                            <span>Questions Attempted &nbsp;</span>
-                            <span>{{lastAttempts.Total_Questions_Attempted__c}}</span>
-                        </span>
-                        <span>
-                            <span>Correct Answers &nbsp;</span>
-                            <span>{{lastAttempts.Answered_Correct__c}}</span>
-                        </span>
-                        <span>
-                            <span>Hidden Multiplier &nbsp;&nbsp;</span>
-                            <span>{{lastAttempts.Hidden_Multiplier__c}}</span>
-                        </span>
-                    </div>
-                    <h1>TOTAL SCORE : {{lastAttempts.Final_Score__c}}</h1>
+                    <h1 class="title">SCORECARD</h1>
+                    <table class="score-details">
+                        <tr>
+                            <td>Pipes Passed</td>
+                            <td>{{lastAttempts.No_of_Pipes_Passed__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Questions Attempted </td>
+                            <td>{{lastAttempts.Total_Questions_Attempted__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Correct Answers </td>
+                            <td>{{lastAttempts.Answered_Correct__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hidden Multiplier </td>
+                            <td>{{lastAttempts.Hidden_Multiplier__c}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>Total</td>
+                            <td>{{lastAttempts.Final_Score__c}}</td>
+                        </tr>
+                    </table>
 
                     <div class="actions">
                         <a href="/rules/{{id}}" class="upper-case text-green">Try Again</a>
