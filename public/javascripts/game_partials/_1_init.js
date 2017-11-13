@@ -52,7 +52,7 @@ $(document).on('initialize-game', function () {
         bird.setBounds(10, 0, 60, 20);
 
         // Score
-        scoreText = new createjs.Text("0", "40px monospace", "#ffffff");
+        scoreText = new createjs.Text("0", "40px monospace", "#2c2c29");
         scoreText.x = 20;
         scoreText.y = 20;
 
