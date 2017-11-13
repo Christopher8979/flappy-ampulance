@@ -1,5 +1,6 @@
 $(document).on('initialize-game', function () {
     stage = new createjs.Stage('game-holder');
+    $("body").addClass("fixed"); // For ie to remove scrollbar issue
 
     // get canvas width and height for later calculations:
     w = stage.canvas.width;

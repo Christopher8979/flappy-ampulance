@@ -53,6 +53,8 @@ body {
     background: linear-gradient(90deg, #464444, #252323);
     z-index: -1;
     opacity: 0.96; }
+  body.fixed {
+    overflow: hidden; }
 
 .deloitte-logo {
   position: fixed;
