@@ -111,7 +111,8 @@ router.get('/rules/:id', (req, res) => {
 
         res.render('rules', {
             data: data,
-            playerID: req.params.id
+            playerID: req.params.id,
+            title: "Rules"
         });
     });
 });
@@ -129,7 +130,8 @@ router.get('/play-game/:id', function (req, res) {
         }
         res.render('game', {
             attemptID: attemptID,
-            id: req.params.id
+            id: req.params.id,
+            title: "Begin Game!"
         });
     });
 
@@ -170,7 +172,8 @@ router.get('/game-over/:id', (req, res) => {
                     topScorrer: topScorrer,
                     player: playerInfo[0],
                     id: req.params.id,
-                    isTopScorrer : topScorrer.score === attemptData[0].Final_Score__c
+                    isTopScorrer : topScorrer.score === attemptData[0].Final_Score__c,
+                    title: "Score"
                 });
             });
         });

@@ -40,6 +40,8 @@ $(document).on("initialize-entry", function () {
         var value = $(this).val().trim();
         var isInvalid = true;
         if (value) {
+            $(this).addClass("hasContent"); // Has some text
+
             if (value && value.split('@').length === 2) {
                 if (value.split('@')[1].split('.').length >= 2 && value.split('@')[1].split('.')[0].length > 0 && value.split('@')[1].split('.')[1].length > 0) {
                     isInvalid = false;
@@ -52,6 +54,7 @@ $(document).on("initialize-entry", function () {
                 $(".error").removeClass("service name email fill-all");
             }
         } else {
+            $(this).removeClass("hasContent"); // Has no text
             $(".error").removeClass("service name fill-all email");
         }
     });

@@ -53,6 +53,8 @@ body {
     background: linear-gradient(90deg, #464444, #252323);
     z-index: -1;
     opacity: 0.96; }
+  body.fixed {
+    overflow: hidden; }
 
 .deloitte-logo {
   position: fixed;
@@ -64,7 +66,7 @@ body {
   color: #fff; }
 
 .text-green {
-  color: green; }
+  color: #558B2F; }
 
 .text-yellow {
   color: #e8c500; }
@@ -293,7 +295,7 @@ body {
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all; }
-  .custom-form input:focus ~ label, .custom-form input:valid ~ label {
+  .custom-form input:focus ~ label, .custom-form input:valid ~ label, .custom-form input.hasContent ~ label {
     top: -20px;
     font-size: 14px;
     color: #1f1818; }
@@ -406,7 +408,26 @@ body {
     color: #fafafa;
     background: #000000;
     padding: 8px 25px;
-    border-radius: 0 4px; }
+    border-radius: 0 4px;
+    overflow: hidden; }
+    .question-box .tally.correct:before, .question-box .tally.incorrect:before, .confirmation .tally.correct:before, .confirmation .tally.incorrect:before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      padding: 8px 0;
+      text-align: center;
+      font-weight: 100;
+      animation: fade-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
+    .question-box .tally.correct::before, .confirmation .tally.correct::before {
+      background: #4CAF50;
+      content: "Correct"; }
+    .question-box .tally.incorrect::before, .confirmation .tally.incorrect::before {
+      background: #F44336;
+      content: "Wrong"; }
+  .question-box .question, .confirmation .question {
+    margin-top: 15px; }
   .question-box .options, .confirmation .options {
     margin: 20px 0; }
   .question-box .option, .confirmation .option {
@@ -426,6 +447,14 @@ body {
       font-weight: bold;
       cursor: pointer;
       outline: none; }
+  .question-box .hint, .confirmation .hint {
+    color: #6a6363;
+    font-style: italic;
+    font-family: serif; }
+    .question-box .hint::before, .confirmation .hint::before {
+      content: 'Hint: "'; }
+    .question-box .hint::after, .confirmation .hint::after {
+      content: '"'; }
 
 .backdrop {
   position: fixed;
@@ -590,23 +619,17 @@ body {
       .rules-container .rules-holder .holder .inst {
         flex-direction: column;
         align-items: flex-start !important;
-        width: 100%; }
-        .rules-container .rules-holder .holder .inst span {
-          padding-bottom: 0.7rem;
-          display: block;
-          width: 100%; }
-          .rules-container .rules-holder .holder .inst span:before {
-            content: "\2022  "; }
+        width: 100%;
+        padding-left: 5px; }
+        .rules-container .rules-holder .holder .inst li {
+          margin-bottom: 15px; }
       .rules-container .rules-holder .holder .action {
         width: 100%;
         justify-content: flex-end !important; }
         .rules-container .rules-holder .holder .action a {
-          text-decoration: none; }
-          .rules-container .rules-holder .holder .action a:hover {
-            text-decoration: none; }
-          .rules-container .rules-holder .holder .action a:active {
-            text-decoration: none; }
-          .rules-container .rules-holder .holder .action a:visited {
+          text-decoration: none;
+          font-weight: bold; }
+          .rules-container .rules-holder .holder .action a:hover, .rules-container .rules-holder .holder .action a:active, .rules-container .rules-holder .holder .action a:visited {
             text-decoration: none; }
 
 #game-holder {

@@ -30,6 +30,14 @@
                 index++;
 
                 $("#question-box .total").text(questions.length)
+
+                // Hint
+                if (question.Hint__c) {
+                    $("#question-box .hint").text(question.Hint__c).show();
+                } else {
+                    $("#question-box .hint").hide();
+                }
+
                 $("#question-box .correct").text(correct)
                 $(".question-frame").addClass("show")
             } else {
@@ -54,12 +62,16 @@
         checkedAnswer: function (data) {
             var self = this;
             if (data.answeredCorrect) {
-                $("#question-box .correct").text(++correct)
+                $("#question-box .score").text(++correct)
+                $("#question-box .tally").addClass("correct")
+            } else {
+                $("#question-box .tally").addClass("incorrect")
             }
 
             setTimeout(function () {
+                $("#question-box .tally").removeClass("incorrect correct")
                 self.showNextQuestion();
-            }, 500);
+            }, 1000);
         }
     }
 

@@ -16,6 +16,10 @@ body {
         z-index: -1;
         opacity: 0.96;
     }
+
+    &.fixed {
+        overflow: hidden;
+    }
 }
 
 .deloitte-logo {
@@ -30,7 +34,7 @@ body {
 }
 
 .text-green {
-    color: green;
+    color: #558B2F;
 }
 
 .text-yellow {
