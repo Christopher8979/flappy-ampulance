@@ -622,7 +622,8 @@ body {
         width: 100%;
         padding-left: 5px; }
         .rules-container .rules-holder .holder .inst li {
-          margin-bottom: 15px; }
+          margin-bottom: 15px;
+          width: 100%; }
       .rules-container .rules-holder .holder .action {
         width: 100%;
         justify-content: flex-end !important; }

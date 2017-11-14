@@ -55,7 +55,9 @@
                     attempt: $("#game-holder").data("id")
                 });
             } else {
-                toast("Select an option");
+                if (!$("#toast-container-top").children().length) {
+                    toast("Select an option");
+                }
             }
         },
 
