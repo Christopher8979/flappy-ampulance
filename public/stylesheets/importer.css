@@ -649,7 +649,7 @@ body {
   justify-content: center; }
 
 .game-end {
-  margin: 4rem 0;
+  margin: 2rem 0;
   display: flex;
   flex: 1;
   align-items: stretch;

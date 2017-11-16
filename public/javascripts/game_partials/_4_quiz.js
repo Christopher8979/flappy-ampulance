@@ -38,8 +38,9 @@
                     $("#question-box .hint").hide();
                 }
 
-                $("#question-box .correct").text(correct)
-                $(".question-frame").addClass("show")
+                $("#question-box .correct").text(correct);
+                $(".question-frame").addClass("show");
+                $("#next-question").attr("disabled",false);
             } else {
                 socket.emit("quiz-done", correct)
             }
@@ -47,14 +48,15 @@
 
         checkAnswer: function (e) {
             var $selectedOption = $("#question-box input[type=radio]:checked");
-
+            $("#next-question").attr("disabled",true);
+            
             if ($selectedOption.length) {
-                socket.emit("checkAnswer", {
-                    id: questions[index - 1].Id,
-                    answer: $selectedOption.val(),
-                    attempt: $("#game-holder").data("id")
-                });
-            } else {
+                    socket.emit("checkAnswer", {
+                        id: questions[index - 1].Id,
+                        answer: $selectedOption.val(),
+                        attempt: $("#game-holder").data("id")
+                    });
+                } else {
                 if (!$("#toast-container-top").children().length) {
                     toast("Select an option");
                 }

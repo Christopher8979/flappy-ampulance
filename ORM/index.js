@@ -41,8 +41,6 @@ module.exports = {
                     return callBack(err, null);
                 }
 
-                console.log(scorrerResp);
-
                 callBack(null, {
                     Player__r: {
                         Name: scorrerResp.records[0].Player_Attempts_Game__r.LSHC_Players__r.Player_Name__c,
