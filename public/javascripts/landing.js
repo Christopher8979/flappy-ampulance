@@ -9,7 +9,7 @@ $(document).on("initialize-entry", function () {
         if (validForm) {
 
             // clear errors and setup the game
-            $('.error').removeClass('email name service');
+            $('.error').removeClass('email name service location');
 
             // Populate data to be verified in salesforce
             var data = {};
@@ -49,13 +49,13 @@ $(document).on("initialize-entry", function () {
             }
 
             if (isInvalid && value !== '') {
-                $(".error").removeClass("service name fill-all").addClass("email");
+                $(".error").removeClass("service name fill-all location").addClass("email");
             } else {
-                $(".error").removeClass("service name email fill-all");
+                $(".error").removeClass("service name email fill-all location");
             }
         } else {
             $(this).removeClass("hasContent"); // Has no text
-            $(".error").removeClass("service name fill-all email");
+            $(".error").removeClass("service name fill-all email location");
         }
     });
 
@@ -103,8 +103,8 @@ function validateEntryForm($form) {
         }
     });
 
-    allFilled ? $('.error').removeClass('fill-all') : $('.error').removeClass("email name service").addClass('fill-all');
+    allFilled ? $('.error').removeClass('fill-all') : $('.error').removeClass("email name service location").addClass('fill-all');
 
-    return !($('.error').hasClass('fill-all') || $('.error').hasClass('email') || $('.error').hasClass('name') || $('.error').hasClass('service'));
+    return !($('.error').hasClass('fill-all') || $('.error').hasClass('location') || $('.error').hasClass('email') || $('.error').hasClass('name') || $('.error').hasClass('service'));
 
 }

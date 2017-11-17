@@ -34,10 +34,19 @@ router.get('/', function (req, res, next) {
 
             var fields = metadata.fields;
             var serviceLineOptions = [];
+            var locationOptions = [];
             fields.forEach(function (value) {
                 if (value.name === process.env.SERVICE_LINE_KEY) {
                     value.picklistValues.forEach(function (options) {
                         serviceLineOptions.push({
+                            label: options.label,
+                            value: options.value
+                        });
+                    });
+                }
+                if (value.name === process.env.LOCATION_KEY) {
+                    value.picklistValues.forEach(function (options) {
+                        locationOptions.push({
                             label: options.label,
                             value: options.value
                         });
@@ -49,7 +58,8 @@ router.get('/', function (req, res, next) {
                 title: 'Flappy Ambulance',
                 description: 'Some random text',
                 topScorrer: topScorrer,
-                serviceLineOptions: serviceLineOptions
+                serviceLineOptions: serviceLineOptions,
+                locationOptions: locationOptions
             });
         });
 
