@@ -31,18 +31,31 @@
                         <label>Email</label>
                     </div>
 
-                    <select name="serviceLine" id="serviceLine" data-params="Service_Line__c">
-                        <option value="" disabled selected>Choose your Service Line</option>
-                        {{#each serviceLineOptions}}
-                            <option value="{{value}}">{{label}}</option>
-                        {{/each}}
-                    </select>
+                    <div class="group">
+                        <select name="serviceLine" id="serviceLine" data-params="Service_Line__c">
+                            <option value="" disabled selected>Choose your Service Line</option>
+                            {{#each serviceLineOptions}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+
+                    </div>
+
+                    <div class="group">
+                        <select name="location" id="location" data-params="Location__c">
+                            <option value="" disabled selected>Choose your Location</option>
+                            {{#each locationOptions}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
 
                     <div class="group error">
                         <label for="" class="fill-all">All fields are required</label>
                         <label for="" class="name">Name should contain only alphabets</label>
                         <label for="" class="email">Email has to be of the format xxx@xxx.xxx</label>
-                        <label for="" class="service">Select a service line</label>
+                        <label for="" class="service">Select a Service line</label>
+                        <label for="" class="location">Select a Location</label>
                     </div>
                 </form>
 
