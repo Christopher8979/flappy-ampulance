@@ -19,20 +19,19 @@ $(document).on("initialize-entry", function () {
                 data[$(ele).data('params')] = $(ele).val();
             });
 
-            console.log(data);
-            // $.ajax({
-            //     url: '/checkUser',
-            //     data: data,
-            //     method: 'POST',
-            //     cache: false,
-            //     success: function (data) {
-            //         location.href = "/rules/" + data.id;
-            //     },
-            //     error: function (err) {
-            //         location.href = '/';
-            //         console.log(err);
-            //     }
-            // });
+            $.ajax({
+                url: '/checkUser',
+                data: data,
+                method: 'POST',
+                cache: false,
+                success: function (data) {
+                    location.href = "/rules/" + data.id;
+                },
+                error: function (err) {
+                    location.href = '/';
+                    console.log(err);
+                }
+            });
         }
     });
 

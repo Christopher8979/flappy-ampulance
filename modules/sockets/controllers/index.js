@@ -30,7 +30,7 @@ module.exports = (io) => {
             }
 
             // If condition is to be written here
-            questions.getLimitedQuestions(socket.score > procecss.env.MAX_QUESTIONS ? procecss.env.MAX_QUESTIONS : socket.score, (e, questions) => {
+            questions.getLimitedQuestions(socket.score > process.env.MAX_QUESTIONS ? process.env.MAX_QUESTIONS : socket.score, (e, questions) => {
                 socket.emit('fetchedQuestions', questions);
             });
 
