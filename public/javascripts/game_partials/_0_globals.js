@@ -10,7 +10,7 @@ var states = Object.freeze({
  });
 var currentstate;
 var gameTicker;
-var loader;
+var loader, sound;
 var score = 0;
 
 var IMAGE_HOLDER = [

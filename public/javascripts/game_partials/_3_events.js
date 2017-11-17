@@ -40,6 +40,7 @@ function playerJump() {
 function playerDead() {
     currentstate = states.ScoreScreen;
     createjs.Ticker.off("tick", gameTicker);
+    music.lowerVolume()
     if (score) {
         socket.emit("crash", {
             pipesPassed: score
@@ -50,6 +51,36 @@ function playerDead() {
 }
 
 function updateScore() {
+    createjs.Sound.play("ding");
     scoreText.text = score;
     socket.emit("cross", (Math.random() + score));
-}
+};
+
+(function (window) {
+    var paused = false;
+    var muted = false;
+    var volume = 0.5;
+
+    var MusicEvents = {
+        mute: function () {
+            muted = !muted;
+
+            sound.volume = (muted) ? 0 : volume;
+            
+            if (muted) {
+                $(".action-btns .mute").addClass("muted");
+            } else {
+                $(".action-btns .mute").removeClass("muted");
+            }
+
+        },
+
+        lowerVolume: function () {
+            sound.volume = volume = 0.1;
+        }
+    }
+    
+    if (window.music == undefined) {
+        window.music = MusicEvents
+    }
+})(window);
