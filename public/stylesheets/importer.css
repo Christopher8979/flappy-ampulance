@@ -645,6 +645,29 @@ body {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
   border-radius: 5px; }
 
+.action-btns {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 1000; }
+  .action-btns .mute {
+    background: #414141;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.41);
+    position: relative;
+    text-align: center; }
+    .action-btns .mute img {
+      position: relative;
+      top: 12px; }
+    .action-btns .mute #mute-icon {
+      display: none; }
+    .action-btns .mute.muted #mute-icon {
+      display: initial; }
+    .action-btns .mute.muted #unmute-icon {
+      display: none; }
+
 .flex-center, .rules-container, .rules-container .best, .rules-container .best .holder, .rules-container .rules-holder, .rules-container .rules-holder .holder, .rules-container .rules-holder .holder .inst, .rules-container .rules-holder .holder .action, .game-end .holder .card > div, .game-end .holder .card .history > div, .game-end .holder .card .history .high-scorrer .content, .game-end .holder .card .history .high-scorrer .content > div {
   display: flex;
   align-items: center;
