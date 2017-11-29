@@ -11,6 +11,25 @@ $(document).on('initialize-game', function () {
     loader.addEventListener("complete", handleComplete);
     loader.loadManifest(IMAGE_HOLDER, true, "../images/");
 
+    // Sounds
+    var soundFiles = [
+        { path: "../audio/bg-music.mp3", key: "music", type: "mp3", main: true },
+        { path: "../audio/ding.mp3", key: "ding", type: "mp3" }
+    ]
+
+    soundFiles.forEach(function(tune) {
+        createjs.Sound.alternateExtensions = tune.type;
+
+        // Play the main track on loop
+        if (tune.main) {
+            createjs.Sound.on("fileload", function () {
+                sound = createjs.Sound.play(tune.key, { interrupt: createjs.Sound.INTERRUPT_NONE, loop: -1, volume: 0.5});
+            }, this);
+        }
+
+        createjs.Sound.registerSound(tune.path, tune.key);
+    }, this);
+
     // Manifest Loading complete handler
     function handleComplete(e) {
 
