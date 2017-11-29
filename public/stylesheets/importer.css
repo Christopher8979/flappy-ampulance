@@ -503,7 +503,47 @@ body {
   100% {
     opacity: 1; } }
 
+.load .loader {
+  display: block; }
+
+.loader {
+  display: none;
+  position: absolute;
+  z-index: 10001;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); }
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg); } }
+  .loader .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    width: 25px;
+    height: 25px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #d32f2f;
+    border-bottom-color: #d32f2f;
+    animation: spinner 0.8s ease infinite;
+    -webkit-animation: spinner 0.8s ease infinite;
+    -moz-animation: spinner 0.8s ease infinite; }
+
 /* Landing */
+.landing .scores {
+  height: 558px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+
 .landing .top-scorer {
   padding: 30px; }
   .landing .top-scorer .label {

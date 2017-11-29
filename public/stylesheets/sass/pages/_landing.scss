@@ -1,6 +1,12 @@
 /* Landing */
 .landing {
 
+    .scores {
+        height: 558px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
     .top-scorer {
         padding: 30px;
         
