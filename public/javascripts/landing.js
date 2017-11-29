@@ -2,7 +2,7 @@ $(document).on("initialize-entry", function () {
     $("select").selecty();
 
     $('#enterGame').on('click', function (e) {
-
+        $("body").addClass("load");
         var $form = $('#credForm');
         var validForm = validateEntryForm($form);
 
@@ -26,10 +26,12 @@ $(document).on("initialize-entry", function () {
                 cache: false,
                 success: function (data) {
                     location.href = "/rules/" + data.id;
+                    $("body").removeClass("load");
                 },
                 error: function (err) {
                     location.href = '/';
                     console.log(err);
+                    $("body").removeClass("load");
                 }
             });
         }
@@ -92,8 +94,8 @@ function validateEntryForm($form) {
             allFilled = false;
         }
     });
-    
-    
+
+
     // Check if drop boxes are null
     $form.find("select").each(function () {
         var $select = $(this);
