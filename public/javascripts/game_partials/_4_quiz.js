@@ -44,6 +44,7 @@
             } else {
                 socket.emit("quiz-done", correct)
             }
+            $("body").removeClass("load");            
         },
 
         checkAnswer: function (e) {
@@ -64,6 +65,7 @@
         },
 
         checkedAnswer: function (data) {
+            $("body").addClass("load");
             var self = this;
             if (data.answeredCorrect) {
                 $("#question-box .score").text(++correct)

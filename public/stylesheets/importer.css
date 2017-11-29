@@ -509,7 +509,7 @@ body {
 .loader {
   display: none;
   position: absolute;
-  z-index: 100;
+  z-index: 10001;
   width: 100%;
   text-align: center;
   bottom: 0;
