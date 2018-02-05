@@ -1,0 +1,98 @@
+{
+    "playersLCount": 10,
+    "isLazyLoading": true,
+    "objectID": "LSHC_Player__c",
+    "playerIdentifier": "Email__c",
+    "playersPerSet": 10,
+    "attemptCompleteFlag": "Attempt_Completed__c",
+    "attemptCompleteValue": true,
+    "scoringKey": "",
+    "attemptsObjName": "LSHC_Player_Attempts__c",
+    "isAttemptComplete": {
+        "key": "Attempt_Completed__c",
+        "objName": "LSHC_Player_Attempts__c",
+        "getThese": [
+            "id",
+            "Attempt_Completed__c"
+        ],
+        "clauses": {},
+        "junctionName": "LSHC_Game_Played__c",
+        "defaltsForNewRecord": [
+            {
+                "key": "Answered_Correct__c",
+                "value": 0
+            },
+            {
+                "key": "Total_Questions_Attempted__c",
+                "value": 0
+            },
+            {
+                "key": "No_of_Pipes_Passed__c",
+                "value": 0
+            }
+        ]
+    },
+    "lastAttemptDetails": {
+        "details": [
+            "Answered_Correct__c",
+            "Final_Score__c",
+            "Hidden_Multiplier__c",
+            "No_of_Pipes_Passed__c",
+            "Total_Questions_Attempted__c",
+            "Id"
+        ],
+        "offset": 0,
+        "from": "LSHC_Player_Attempts__c",
+        "clauses": {
+            "Attempt_Completed__c": true
+        },
+        "subQuerySelector": "Players__c",
+        "default": {
+            "No_of_Pipes_Passed__c": 0,
+            "Answered_Correct__c": 0,
+            "Final_Score__c": 0
+        }
+    },
+    "latestAttempts": 2,
+    "details": {
+        "object": "LSHC_Player__c",
+        "details": [
+            "Email__c",
+            "Player_Name__c",
+            "Service_Line__c"
+        ]
+    },
+    "playerLinkCheck": {
+        "name": "LSHC_Game_Played__c",
+        "key": "LSHC_Players__c"
+    },
+    "personalBest": {
+        "object": "LSHC_Player_Attempts__c",
+        "details": [
+            "ID",
+            "Answered_Correct__c",
+            "Final_Score__c",
+            "Hidden_Multiplier__c",
+            "No_of_Pipes_Passed__c",
+            "Total_Questions_Attempted__c"
+        ]
+    },
+    "attemptsLink": "LSHC_Game_Played__c",
+    "getWinner": {
+        "name": "LSHC_Player_Attempts__c",
+        "details": [
+            "ID",
+            "Final_Score__c"
+        ],
+        "clauses": {},
+        "winnerDetails": [
+            "ID",
+            "Final_Score__c",
+            "Hidden_Multiplier__c",
+            "Player_ID__c",
+            "Player_Attempts_Game__r.LSHC_Players__r.Player_Name__c",
+            "Player_Attempts_Game__r.LSHC_Players__r.Email__c",
+            "Player_Attempts_Game__r.LSHC_Players__r.Service_Line__c"
+        ]
+    }
+}

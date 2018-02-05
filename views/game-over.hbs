@@ -1,0 +1,59 @@
+<div class="container main">
+    <div class="game-end">
+        <div class="holder">
+            <div class="card clearfix">
+                <div class="history">
+                    <div class="latest-score">
+                        {{#if isTopScorrer}}
+                        <img src="../images/crown.png" alt=""> {{else}}
+                        <img src="../images/cup.png" alt=""> {{/if}}
+                        <h1 class="text-white">{{lastAttempts.Final_Score__c}}</h1>
+                        <span class="text-white">{{player.Player_Name__c}}</span>
+                        <span class="text-green">{{player.Email__c}}</span>
+                    </div>
+                    <div class="high-scorrer">
+                        <h3 class="text-white">Top Scorrer</h3>
+                        <div class="content">
+                            <div>
+                                <span class="text-white upper-case">{{topScorrer.name}}</span>
+                                <span class="text-green">{{topScorrer.email}}</span>
+                                <span class="text-ash">{{topScorrer.serviceLine}}</span>
+                            </div>
+                            <h1 class="text-yellow">{{topScorrer.score}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary">
+                    <h1 class="title">SCORECARD</h1>
+                    <table class="score-details">
+                        <tr>
+                            <td>Pipes Passed</td>
+                            <td>{{lastAttempts.No_of_Pipes_Passed__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Questions Attempted </td>
+                            <td>{{lastAttempts.Total_Questions_Attempted__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Correct Answers </td>
+                            <td>{{lastAttempts.Answered_Correct__c}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hidden Multiplier </td>
+                            <td>{{lastAttempts.Hidden_Multiplier__c}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>Total</td>
+                            <td>{{lastAttempts.Final_Score__c}}</td>
+                        </tr>
+                    </table>
+
+                    <div class="actions">
+                        <a href="/rules/{{id}}" class="upper-case text-green">Try Again</a>
+                        <a href="/" class="upper-case text-red">Quit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-image: url(/images/bg.png);
+    background-size: 400px;
+    margin: 0;
+    
+    &:after {
+        display: block;
+        content: "";
+        clear: both;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        background: linear-gradient(90deg, #464444, #252323);
+        z-index: -1;
+        opacity: 0.96;
+    }
+
+    &.fixed {
+        overflow: hidden;
+    }
+}
+
+.deloitte-logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-green {
+    color: #558B2F;
+}
+
+.text-yellow {
+    color: #e8c500;
+}
+
+.text-ash {
+    color: rgb(102, 102, 102);
+}
+
+.text-red {
+    color: #e62828;
+}
+
+.text-orange {
+    color: #dc8c52;
+}
+
+.upper-case {
+    text-transform: uppercase;
+}

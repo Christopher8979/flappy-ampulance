@@ -1,0 +1,46 @@
+#game-holder {
+    width: 90%;
+    max-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.43);
+    border-radius: 5px;
+}
+
+.action-btns {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 1000;
+
+    .mute {
+        background: #414141;
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.41);
+        position: relative;
+        text-align: center;
+
+        img {
+            position: relative;
+            top: 12px;
+        }
+
+        #mute-icon {
+            display: none;
+        }
+
+        &.muted {
+            #mute-icon {
+                display: initial;
+            }
+
+            #unmute-icon {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,124 @@
+
+.flex-center {
+    display: flex;                
+    align-items: center;              
+    justify-content: center;
+}
+
+.game-end {
+    margin: 2rem 0;
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: center;
+
+
+    .holder {
+        width: 70%;
+        display: flex;
+
+        .card{
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex: 1;
+            
+            & > div {
+                @extend .flex-center;
+            }
+
+            .history {
+                background: rgb(19, 19, 19);
+                flex-grow: 4.5;
+                flex-direction: column;
+                align-items: stretch;              
+                
+                & > div {
+                    @extend .flex-center;                    
+                }
+
+                .latest-score {
+                    flex-grow: 6;
+                    background: #1f1e1e;
+                    flex-direction: column;
+
+                    h1 {
+                        margin: 0.1rem 0;
+                        margin-top: 1rem;
+                        font-size: 5rem;
+                    }
+
+                }
+
+                .high-scorrer {
+                    flex-grow: 4;
+                    flex-direction: column;
+
+                    & > h3 {
+                        margin: 0rem 0 1rem 0;
+                    }
+
+                    .content {
+                        width: 80%;
+                        @extend .flex-center;
+                        align-items: flex-end;
+
+                        & > div {
+                            @extend .flex-center;
+                            flex-grow: 5;
+                            flex-direction: column;
+                            align-items: flex-end;
+                        }
+
+                        & > h1 {
+                            flex-grow: 5;
+                            text-align: right;
+                            font-size: 3rem;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+
+            .summary {
+                flex-grow: 5.5;
+                flex-direction: column;
+
+                .title {
+                    margin-bottom: 50px;
+                    font-size: 2.5rem;
+                }
+                
+                .total {
+                    font-size: 5rem;
+                    font-weight: bold;
+
+                    td:nth-child(1) {
+                        color: grey;
+                    }
+                }
+                
+                .score-details {
+                    margin: 0 50px;
+                    margin-bottom: 50px;
+
+                    td:nth-child(1) {
+                        text-align: right;
+                        padding-right: 50px;
+                    }
+                }
+
+                .actions{
+                    width: 60%;
+                    display: flex;
+                    justify-content: space-around;
+                    font-weight: bold;
+
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }        
+    }
+}

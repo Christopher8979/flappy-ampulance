@@ -1,2 +1,79 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="landing container main custom-form">
+    <div class="row">
+        <div class="col scores">
+            <div class="card default-z top-scorer">
+                <div class="label">Current Top Scorer</div>
+                <div class="inline-block">
+                    <div class="name">{{topScorrer.name}}</div>
+                    <div class="email">{{topScorrer.email}}</div>
+                </div>
+                <div class="inline-block">
+                    <div class="score">{{topScorrer.score}}</div>
+                </div>
+            </div>
+
+            <div class="card default-z top-scorer">
+                <div class="label">Health Trek (Game 1) Winner</div>
+                <div class="inline-block">
+                    <div class="name">Clayton Pereira</div>
+                    <div class="email">clpereira@deloitte.com</div>
+                </div>
+                <div class="inline-block">
+                    <div class="score">221.13</div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card default-z login">
+                <img src="/images/game_name.png" alt="Flappy Ambulance">
+                <form id="credForm">
+
+                    {{!-- Name --}}
+                    <div class="group">
+                        <input type="text" required autocomplete="off" maxlength="20" id="name" data-params="Player_Name__c">
+                        <span class="bar"></span>
+                        <label>Name</label>
+                    </div>
+
+                    {{!-- Email --}}
+                    <div class="group">
+                        <input type="email" autocomplete="off" id="email" required data-params="Email__c">
+                        <span class="bar"></span>
+                        <label>Email</label>
+                    </div>
+
+                    <div class="group">
+                        <select name="serviceLine" id="serviceLine" data-params="Service_Line__c">
+                            <option value="" disabled selected>Choose your Service Line</option>
+                            {{#each serviceLineOptions}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+
+                    </div>
+
+                    <div class="group">
+                        <select name="location" id="location" data-params="Location__c">
+                            <option value="" disabled selected>Choose your Location</option>
+                            {{#each locationOptions}}
+                                <option value="{{value}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="group error">
+                        <label for="" class="fill-all">All fields are required</label>
+                        <label for="" class="name">Name should contain only alphabets</label>
+                        <label for="" class="email">Email has to be of the format xxx@xxx.xxx</label>
+                        <label for="" class="service">Select a Service line</label>
+                        <label for="" class="location">Select a Location</label>
+                    </div>
+                </form>
+
+                <button id="enterGame" class="submit">
+                    Start Game
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+/* Landing */
+.landing {
+
+    .scores {
+        height: 558px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .top-scorer {
+        padding: 30px;
+        
+        .label {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: grey;
+        }
+        
+        .name {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .email {
+            color: #2E7D32;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-left: 30px;
+            color: #e1ae14;
+        }
+        
+        &:before {
+            content: "";
+            display: block;
+            clear: both;
+            position: absolute;
+            top: -29px;
+            right: -21px;
+            background: url("/images/landing_crown.png");
+            width: 87px;
+            height: 69px;
+            background-size: contain;
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: pop-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1s forwards;
+        }
+    }
+
+    .login {
+        padding: 50px 0 0 0;
+        margin-bottom: 0;
+        margin-top: 3rem;
+
+        img {
+            position: absolute;
+            width: 300px;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        form {
+            width: 300px;
+            margin: 50px;
+        }
+
+        .submit {
+            background: linear-gradient(#FFCA28, #FFC107);
+            padding: 20px;
+            border-radius: 0 0 4px 4px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.26);    
+            width: 100%;
+            border: none;
+            outline: none;
+            margin-top: 5px;
+            
+            &:active {
+                background: linear-gradient(#eebb1d, #FFC107);
+            }
+        }
+    }
+}
+
+
+
+
+@keyframes pop-in {
+    0% {
+        transform: translate(0, -30px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0,0);
+        opacity: 1;
+    }
+}
+
+.error {
+
+    top: -40px;
+    
+    & > label {
+        display: none;
+        color: #e24040;
+    }
+
+    &.email {
+        .email {
+            display: block;
+        }
+    }
+    &.name {
+        .name {
+            display: block;
+        }
+    }
+    &.service {
+        .service {
+            display: block;
+        }
+    }
+    &.fill-all {
+        .fill-all {
+            display: block;
+        }
+    }
+    &.location {
+        .location {
+            display: block;
+        }
+    }
+}
