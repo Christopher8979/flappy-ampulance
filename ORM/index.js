@@ -97,6 +97,8 @@ module.exports = {
     },
     checkRecords: (object, key, value, callBack) => {
         var query = "Select id from " + object + " where " + key + " = \'" + value + "\'";
+        console.log("checkRecords query");
+        console.log(query);
         FS.Query(query, function (err, findResp) {
 
             if (err) {
@@ -133,6 +135,7 @@ module.exports = {
         });
     },
     createRecord: (object, data, callBack) => {
+
         FS.create(object, data, function (err, createResp) {
             if (err) {
                 callBack(err, null);
@@ -190,6 +193,8 @@ module.exports = {
 
         getUncheckedRecordsQuery = getUncheckedRecordsQuery + "Attempt_Completed__c = false";
 
+        console.log("=========getUncheckedRecordsQuery=========");
+        console.log(getUncheckedRecordsQuery);
         FS.Query(getUncheckedRecordsQuery, function (err, resp) {
             if (err) {
                 return callBack(err, null);
